@@ -13,6 +13,7 @@ import {
     limit,
     orderBy,
     serverTimestamp,
+    documentId,
     
     addDoc,
     // collection,
@@ -23,8 +24,6 @@ import {
     // getFirestore,
     updateDoc,
 } from "./firestore-init.js";
-
-const channelRef = collection(db, 'channels')
 
 export async function getChan(){
     const q = query(collection(db, "channels"));
@@ -40,4 +39,18 @@ export async function getChan(){
             console.log(post.id, " => ", post.data());
         })
     });
+}
+
+export async function getChannel(channel_id){
+    let channelRef = doc(db, `channels/${channel_id}`)
+    let channelSnap = await getDoc(channelRef)
+    console.log(channelSnap.id, ' => ', channelSnap.data())
+}
+
+export async function getChannelsFromList(channel_list){
+    let q = query(collection(db, "channels"), where(documentId(), 'in', channel_list));
+    let querySnapshot = await getDocs(q);
+    querySnapshot.forEach((channel) => {
+        console.log(channel.id, ' => ', channel.data());
+    })
 }

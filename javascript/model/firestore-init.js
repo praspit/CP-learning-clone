@@ -35,6 +35,8 @@ export {
   orderBy,
   limit,
   serverTimestamp,
+  documentId,
+  increment,
     
     addDoc,
     // collection,

@@ -29,17 +29,3 @@ export async function getUser(username){
     let userSnap = await getDoc(userRef)
     console.log(userSnap.id, ' => ', userSnap.data())
 }
-
-export async function setTime(){
-    await(setDoc(doc(db, 'timers', 'timer1'), {
-        timer : serverTimestamp(),
-        xtimer : serverTimestamp()
-    }))
-    console.log("set time successfully")
-}
-
-export async function getTime() {
-    let timerRef = doc(db, 'timers', 'timer1')
-    let timerSnap = await getDoc(timerRef)
-    console.log(timerSnap.id, ' => ', timerSnap.data())
-}
