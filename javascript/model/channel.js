@@ -27,16 +27,25 @@ import {
 
 
 export async function getChannel(channel_id){
-    let channelRef = doc(db, `channels/${channel_id}`)
-    let channelSnap = await getDoc(channelRef)
-    console.log(channelSnap.id, ' => ', channelSnap.data())
-    return channelSnap.data()
+    let channelRef = doc(db, `channels/${channel_id}`);
+    let channelSnap = await getDoc(channelRef);
+    console.log(channelSnap.id, ' => ', channelSnap.data());
+    return channelSnap.data();
 }
 
 export async function getChannelsFromList(channel_list){
     let q = query(collection(db, "channels"), where(documentId(), 'in', channel_list));
     let querySnapshot = await getDocs(q);
     let channels = querySnapshot.docs.map(doc => doc.data());
-    console.log(channels)
-    return channels
+    console.log(channels);
+    return channels;
 }
+
+export async function getAllChannels(){
+    let q = collection(db, "channels");
+    let querySnapshot = await getDocs(q);
+    let channels = querySnapshot.docs.map(doc => doc.data());
+    console.log(channels);
+    return channels;
+}
+
