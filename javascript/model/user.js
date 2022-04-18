@@ -28,4 +28,5 @@ export async function getUser(username){
     let userRef = doc(db, `users/${username}`)
     let userSnap = await getDoc(userRef)
     console.log(userSnap.id, ' => ', userSnap.data())
+    return userSnap.data()
 }

@@ -49,6 +49,7 @@ export async function getOnePost(post_id) {
         let postSnap = await getDocs(postRef);
         postSnap = postSnap.docs[0];
         console.log(postSnap.id, ' => ', postSnap.data())
+        return postSnap.data()
     }
 }
 
@@ -56,14 +57,15 @@ export async function getOnePostInChannel(channel_id, post_id){
     let postRef = getPostRef(post_id, channel_id);
     let postSnap = await getDoc(postRef)
     console.log(postSnap.id, ' => ', postSnap.data())
+    return postSnap.data()
 }
 
 export async function getPostListInChannel(channel_id){
     let postRef = collection(db, `channels/${channel_id}/posts`)
     let postSnap = await getDocs(postRef)
-    postSnap.forEach((post) => {
-        console.log(post.id, ' => ', post.data());
-    })
+    let posts = postSnap.docs.map(doc => doc.data());
+    console.log(posts)
+    return posts
 }
 
 export async function incrementPostUpvote(post_id, channel_id = '', amt = 1){
@@ -74,5 +76,5 @@ export async function incrementPostUpvote(post_id, channel_id = '', amt = 1){
     await updateDoc(postRef, {
         upvotes: increment(amt)
     })
-    console.log('done')
+    console.log('upvote incremented')
 }
