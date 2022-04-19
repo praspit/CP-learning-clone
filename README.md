@@ -5,3 +5,4 @@
 - might need to hard reload the page when update javascript/css files (hold down the refresh button in chrome)
 
 > a
+VSC
