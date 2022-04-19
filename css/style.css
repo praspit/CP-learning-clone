@@ -49,9 +49,50 @@ body {
     transform: scale(98%);
 }
 
-.posts-container {
+.main-info-container {
     width: 80%;
     height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.channel-title {
+    display: flex;
+    flex-direction: column;
+}
+
+.post-form-container {
+    display: flex;
+    flex-direction: column;
+    margin-left: auto;
+    margin-right: auto;
+    width:90%;
+}
+
+.name-title-input {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+#username-input {
+    width: calc(30% - 5px);
+    margin-right: 5px;
+}
+
+#title-input {
+    width: 70%;
+}
+
+#description-input {
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+.posts-container {
+    width: 100%;
+    height: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
