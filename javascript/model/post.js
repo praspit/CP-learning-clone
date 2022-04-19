@@ -26,7 +26,7 @@ import {
     updateDoc,
 } from "./firestore-init.js";
 
-export function getPostRef(post_id, channel_id = ''){
+function getPostRef(post_id, channel_id = ''){
     if(channel_id){
         return doc(db, `channels/${channel_id}/posts/${post_id}`)
     }
@@ -34,7 +34,7 @@ export function getPostRef(post_id, channel_id = ''){
     return postRef
 }
 
-export async function getSingleDocRefFromQuery(docRef){
+async function getSingleDocRefFromQuery(docRef){
     if(docRef.type == 'query'){
         let docSnap = await getDocs(docRef);
         docSnap = docSnap.docs[0];
@@ -60,21 +60,33 @@ export async function getOnePostInChannel(channel_id, post_id){
     return postSnap.data()
 }
 
-export async function getPostListInChannel(channel_id){
-    let postRef = collection(db, `channels/${channel_id}/posts`)
+// sortBy parameter can be only 'upvotes' or 'timestamp' (if not provided, it will be 'timestamp')
+export async function getPostListInChannel(channel_id, sortBy='timestamp'){
+    if(sortBy && (sortBy == 'upvotes' || sortBy == 'timestamp')){
+        var postRef = query(collection(db, `channels/${channel_id}/posts`), orderBy(sortBy, 'desc'));
+    }
+    else {
+        var postRef = collection(db, `channels/${channel_id}/posts`)
+    }
     let postSnap = await getDocs(postRef)
     let posts = postSnap.docs.map(doc => doc.data());
     console.log(posts)
     return posts
 }
 
-export async function incrementPostUpvote(post_id, channel_id = '', amt = 1){
+export async function incrementPostUpvote(user_id, post_id, channel_id = '', amt = 1){
     let postRef = getPostRef(post_id, channel_id);
     if(postRef.type === 'query'){
         postRef = await getSingleDocRefFromQuery(postRef);
     }
+    postSnap = await getDoc(postRef);
+    if(postSnap.Data().upvoters.includes(user_id)){
+        console.log('already upvoted')
+        return
+    }
     await updateDoc(postRef, {
-        upvotes: increment(amt)
+        upvotes: increment(amt),
+        upvoters: arrayUnion(user_id)
     })
     console.log('upvote incremented')
 }
