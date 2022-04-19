@@ -14,17 +14,32 @@
 }
 
 .nav-bar {
-    width: max(10%, 80px);
+    width: max(20%, 120px);
     height: 100%;
     border-right: 1px rgb(190, 188, 188) solid;
     display: flex;
     flex-direction: column;
 }
 
+.channel-container {
+    width: calc(100%-10px);
+    height: 100px;
+    margin: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    background-color: whitesmoke;
+    border:2px dodgerblue solid;
+}
+
+.channel-container:active {
+    transform: scale(98%);
+}
+
 .posts-container {
-    width: 90%;
+    width: 80%;
     height: 100%;
-    /* background-color: aquamarine; */
     display: flex;
     flex-direction: column;
     align-items: center;
