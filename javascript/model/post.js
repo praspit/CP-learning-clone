@@ -63,7 +63,11 @@ export async function getOnePostInChannel(channel_id, post_id){
 // sortBy parameter can be only 'upvotes' or 'timestamp' (if not provided, it will be 'timestamp')
 export async function getPostListInChannel(channel_id, sortBy='timestamp', onlyActive=true){
     if(sortBy && (sortBy == 'upvotes' || sortBy == 'timestamp')){
-        var postRef = query(collection(db, `channels/${channel_id}/posts`), where('closed', '==', false), orderBy(sortBy, 'desc'));
+        if(onlyActive){
+            var postRef = query(collection(db, `channels/${channel_id}/posts`), where('closed', '==', false), orderBy(sortBy, 'desc'));
+        }else{
+            var postRef = query(collection(db, `channels/${channel_id}/posts`), orderBy(sortBy, 'desc'));
+        }
     }
     else {
         var postRef = collection(db, `channels/${channel_id}/posts`)
