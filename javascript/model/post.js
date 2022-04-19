@@ -1,6 +1,5 @@
 import {
     db,
-    app,
 	doc,
 	getDoc,
 	getDocs,
@@ -15,6 +14,7 @@ import {
     serverTimestamp,
     documentId,
     increment,
+    arrayUnion,
     
     addDoc,
     // collection,
@@ -90,4 +90,17 @@ export async function uploadPost(channel_id, post){
     })
     let postSnap = await getDoc(postRef);
     console.log('post uploaded => ', postSnap.data())
+}
+
+export async function uploadAnswer(channel_id, post_id, answer){
+    answer = answer.toFirestore()
+    answer.timestamp = {
+        seconds: Math.floor(Date.now() / 1000),
+    }
+    let postRef = getPostRef(post_id, channel_id);
+    await updateDoc(postRef, {
+        answers : arrayUnion(answer)
+    })
+    let postSnap = await getDoc(postRef);
+    console.log('answer uploaded => post id ',postRef.id, postSnap.data().answers)
 }

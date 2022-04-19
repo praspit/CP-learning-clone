@@ -4,7 +4,9 @@ export class Reply {
     constructor(author, content) {
         this.author = author;
         this.content = content;
-        this.timestamp = serverTimestamp();
+        this.timestamp = {
+            seconds : Date.now() / 1000,
+        }
     }
     toFirestore() {
         return {
@@ -16,14 +18,15 @@ export class Reply {
 }
 
 export class Answer {
-    constructor(author, content, post_id, from_teacher, idx=-1) {
+    constructor(author, content, post_id, from_teacher) {
         this.author = author;
         this.content = content;
+        this.timestamp = {
+            seconds : Date.now() / 1000,
+        }
         this.from_teacher = from_teacher;
-        this.timestamp = serverTimestamp();
         this.replies = [];
         this.post_id = post_id;
-        this.idx = idx;
         this.upvotes = 0;
         this.upvoters = [];
     }
@@ -35,7 +38,6 @@ export class Answer {
             timestamp : this.timestamp,
             replies : this.replies,
             post_id : this.post_id,
-            idx : this.idx,
             upvotes : this.upvotes,
             upvoters : this.upvoters
         }
@@ -76,5 +78,14 @@ export class User {
         this.role = role;
         this.member_channels = [];
         this.created_posts = [];
+    }
+    toFirestore() {
+        return {
+            username : this.username,
+            name : this.name,
+            role : this.role,
+            member_channels : this.member_channels,
+            created_posts : this.created_posts
+        }
     }
 }

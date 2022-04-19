@@ -37,6 +37,7 @@ export {
   serverTimestamp,
   documentId,
   increment,
+  arrayUnion,
     
     addDoc,
     // collection,
