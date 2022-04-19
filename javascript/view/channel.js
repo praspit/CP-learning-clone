@@ -1,9 +1,13 @@
 let channelContainer = document.querySelector(".nav-bar");
 
 export function showAllChannels(channels) {
-    let html = '';
+    channelContainer.innerHTML = '';
+
     channels.forEach(channel=> {
-        html += `<button class="channel-container">${channel.channel_name}</button>`;
+        let btn = document.createElement('button')
+        btn.className = "channel-container";
+        btn.onclick = function(){console.log('hello')};
+        btn.innerHTML = channel.channel_name;
+        channelContainer.appendChild(btn);
     });
-    channelContainer.innerHTML = html;
 }
