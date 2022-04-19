@@ -7,8 +7,8 @@ export function showPostsFromChannel(posts) {
         btn.className = 'post-container';
         btn.innerHTML = `
             <h1>${post.title}</h1>
+            <span>By ${post.author}</span>
             <p>${post.description}</p>
-            <h3>${post.author}</h3>
         `
         btn.onclick = function(){
             console.log(post);

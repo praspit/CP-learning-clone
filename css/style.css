@@ -6,12 +6,23 @@
     font-size: 1rem;
 }
 
-.main-page {
+body {
     width: 100vw;
     height: 100vh;
+}
+
+.title {
+    display: flex;
+    height: 50px;
+    justify-content: center;
+    align-items: center;
+}
+
+.main-page {
+    width: 100%;
+    height: calc(100% - 50px);
     display: flex;
     flex-direction: row;
-    /* background-color: aqua; */
 }
 
 .nav-bar {
@@ -59,6 +70,10 @@
 
 .post-container > h1 {
     font-size: 1.5em;
+}
+
+.post-container > span {
+    font-size: 0.7em;
 }
 
 .post-container > p {
