@@ -1,3 +1,5 @@
+import { showPostsFromChannelCtrl } from "../controller/postCtrl.js";
+
 let channelContainer = document.querySelector(".nav-bar");
 
 export function showAllChannels(channels) {
@@ -6,7 +8,9 @@ export function showAllChannels(channels) {
     channels.forEach(channel=> {
         let btn = document.createElement('button')
         btn.className = "channel-container";
-        btn.onclick = function(){console.log('hello')};
+        btn.onclick = function(){
+            showPostsFromChannelCtrl(channel.uid);
+        }
         btn.innerHTML = channel.channel_name;
         channelContainer.appendChild(btn);
     });
