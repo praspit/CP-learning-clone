@@ -30,3 +30,14 @@ export async function getUser(username){
     console.log(userSnap.id, ' => ', userSnap.data())
     return userSnap.data()
 }
+
+export async function getTime(){
+    let timerRef = doc(db, "timers", "timer1")
+    let timerSnap = await getDoc(timerRef)
+    console.log(timerSnap.data())
+    console.log(timerSnap.data().timer)
+    console.log(timerSnap.data().timer.seconds)
+    let time = serverTimestamp()
+    console.log(time)
+    return time
+}

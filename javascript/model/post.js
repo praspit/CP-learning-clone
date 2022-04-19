@@ -78,3 +78,16 @@ export async function incrementPostUpvote(post_id, channel_id = '', amt = 1){
     })
     console.log('upvote incremented')
 }
+
+// you need to create post using the constructor in schema.js and pass it to this function
+export async function uploadPost(channel_id, post){
+    post = post.toFirestore()
+    post.timestamp = serverTimestamp();
+    let postCollectionRef = collection(db, `channels/${channel_id}/posts`);
+    let postRef = await addDoc(postCollectionRef, post);
+    await updateDoc(postRef, {
+        uid: postRef.id
+    })
+    let postSnap = await getDoc(postRef);
+    console.log('post uploaded => ', postSnap.data())
+}
