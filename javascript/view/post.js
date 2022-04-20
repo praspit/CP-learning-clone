@@ -1,4 +1,4 @@
-import { uploadPost, getOnePostInChannel} from "../model/post.js";
+import { uploadPost, getOnePostInChannel, uploadAnswer} from "../model/post.js";
 import { User, Post, Answer, Reply } from "../model/schema.js"
 
 let postsContainer = document.querySelector('.posts-container');
@@ -55,20 +55,43 @@ async function showAllAnswersInOnePost(channel_id, post_id) {
     let answerSection = document.querySelector(`[data-uid="${post_id}"]`).getElementsByClassName("answer-section")[0];
     answerSection.innerHTML = '';
     let post = await getOnePostInChannel(channel_id, post_id);
-    if(post.answers.length===0)return;
+
     post.answers.forEach(answer => {
         let answerContainer = document.createElement('div');
         answerContainer.classList = "answer-container";
         answerContainer.innerHTML = `
             <div>
-                ${answer.author}
-            </div>
-            <div>
-                ${answer.content}
+                ${answer.author}: ${answer.content}
             </div>
         `
         answerSection.appendChild(answerContainer);
     })
+
+    let answerFormContainer = document.createElement('div');
+    answerFormContainer.classList = "answer-form-container";
+    answerFormContainer.innerHTML = `
+        <div class="name-answer-input">
+            <input type="text" id="username-input-${post_id}" class="username-input" name="userName" placeholder="Reply as" maxlength=20><span></span>
+            <input type="text" id="answer-input-${post_id}" class="answer-input" "name="answer" placeholder="Write your reply" maxlength=100>
+        </div>
+    `
+    let answerBtn = document.createElement('button');
+    answerBtn.innerText = "Post";
+    answerBtn.classList = "answer-submit-button"
+    answerBtn.onclick = function() {
+        let userName = document.getElementById(`username-input-${post_id}`).value;
+        let answer = document.getElementById(`answer-input-${post_id}`).value;
+
+        if(userName && answer ){
+            uploadAnswer(channel_id, post_id, new Answer(userName, answer, post_id, false))
+            showAllAnswersInOnePost(channel_id, post_id);
+        }else{
+            console.log("please fills all the answer fields");
+        }
+    }
+    answerFormContainer.appendChild(answerBtn);
+
+    answerSection.appendChild(answerFormContainer);
     answerSection.setAttribute("open","");
 }
 
