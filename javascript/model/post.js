@@ -86,13 +86,14 @@ export async function incrementPostUpvote(user_id, post_id, channel_id = '', amt
     postSnap = await getDoc(postRef);
     if(postSnap.Data().upvoters.includes(user_id)){
         console.log('already upvoted')
-        return
+        return false
     }
     await updateDoc(postRef, {
         upvotes: increment(amt),
         upvoters: arrayUnion(user_id)
     })
     console.log('upvote incremented')
+    return true
 }
 
 // you need to create post using the constructor in schema.js and pass it to this function

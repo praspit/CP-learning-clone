@@ -41,3 +41,16 @@ export async function getTime(){
     console.log(time)
     return time
 }
+
+export async function uploadNewUser(user){
+    user = user.toFirestore();
+    let userRef = doc(db, `users/${user.username}`)
+    let userSnap = await getDoc(userRef)
+    if(userSnap.exists()){
+        console.log(`User ${user.username} already exists`)
+        return false
+    }
+    await setDoc(userRef, user)
+    console.log(`User ${user.username} added`)
+    return true
+}

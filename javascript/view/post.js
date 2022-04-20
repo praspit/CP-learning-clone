@@ -1,4 +1,4 @@
-import { uploadPost, getOnePostInChannel, uploadAnswer} from "../model/post.js";
+import { uploadPost, getOnePostInChannel, uploadAnswer, getPostListInChannel} from "../model/post.js";
 import { User, Post, Answer, Reply } from "../model/schema.js"
 
 let postsContainer = document.querySelector('.posts-container');
@@ -34,8 +34,8 @@ export function showPostsFromChannel(posts) {
                     let p = await getOnePostInChannel(post.channel_id, post.uid);
                     console.log(p);
                     showAllAnswersInOnePost(post.channel_id, post.uid);
-                } catch {
-                    console.log(`can't get post ${post.channel_id} from channel ${post.uid}`)
+                } catch(err) {
+                    console.log(`can't get post ${post.channel_id} from channel ${post.uid}`, '\n', err);
                 }
             }
         }
@@ -107,12 +107,18 @@ export function showPostForm(channel_id) {
     let formSubmitBtn = document.createElement('button');
     formSubmitBtn.className = "form-submit-button";
     formSubmitBtn.innerText = "Post";
-    formSubmitBtn.onclick = function() {
+    formSubmitBtn.onclick = async function() {
         let userName = document.getElementById("username-input").value;
         let title = document.getElementById("title-input").value;
         let description = document.getElementById("description-input").value;
         if(userName && title && description){
-            uploadPost(channel_id, new Post(userName, title, description, channel_id));
+            try {
+                uploadPost(channel_id, new Post(userName, title, description, channel_id));
+                showPostsFromChannel(await getPostListInChannel(channel_id));
+            }
+            catch(err){
+                console.log(err);
+            }
         }else{
             alert('please fills all the fields');
         }
