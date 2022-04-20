@@ -38,7 +38,7 @@ export function showPostForm(channel_id) {
         let title = document.getElementById("title-input").value;
         let description = document.getElementById("description-input").value;
         if(userName && title && description){
-            console.log([userName, title, description, channel_id]);
+            uploadPost(channel_id, new Post(userName, title, description, channel_id));
         }else{
             alert('please fills all the fields');
         }
