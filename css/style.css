@@ -186,6 +186,7 @@ body {
     border: 1px rgba(0, 0, 0, 0.12) solid;
     z-index: 0;
     transform: translateY(-10px);
+    transform-origin: top;
     padding-top: 10px;
     background-color: #8cbaff;
 }
@@ -242,7 +243,8 @@ body {
 }
 
 .answer-form-container {
-    width:100%;
+    margin: 0 10px;
+    width:calc(100% - 20px);
     display: flex;
     flex-direction: row;
 }
@@ -250,10 +252,13 @@ body {
 .name-answer-input {
     width: calc(80% - 5px);
     margin-right: 5px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
 }
 
 .username-input {
-    width: calc(20% - 5px);
+    width: max(calc(20% - 5px), 50px);
     border: none;
 }
 
@@ -262,7 +267,7 @@ body {
 }
 
 .answer-input {
-    width: 80%;
+    width: max(80%, 100px);
     border: none;
 }
 
