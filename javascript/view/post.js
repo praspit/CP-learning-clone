@@ -113,12 +113,15 @@ export function showPostForm(channel_id) {
         let description = document.getElementById("description-input").value;
         if(userName && title && description){
             try {
-                uploadPost(channel_id, new Post(userName, title, description, channel_id));
+                await uploadPost(channel_id, new Post(userName, title, description, channel_id));
                 showPostsFromChannel(await getPostListInChannel(channel_id));
             }
             catch(err){
                 console.log(err);
             }
+            document.getElementById("username-input").value = '';
+            document.getElementById("title-input").value = '';
+            document.getElementById("description-input").value = '';
         }else{
             alert('please fills all the fields');
         }
