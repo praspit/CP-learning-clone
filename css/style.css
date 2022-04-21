@@ -1,14 +1,18 @@
+@import url("https://fonts.googleapis.com/css2?family=Mitr:wght@200;400;600&display=swap");
+
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: 'Prompt', sans-serif;
+    font-family: 'Mitr', sans-serif;
     font-size: 1rem;
 }
+
 
 body {
     width: 100vw;
     height: 100vh;
+    background-color: whitesmoke;
 }
 
 .title {
@@ -16,6 +20,7 @@ body {
     height: 50px;
     justify-content: center;
     align-items: center;
+    
 }
 
 .main-page {
@@ -59,6 +64,13 @@ body {
 .channel-title {
     display: flex;
     flex-direction: column;
+    margin-left: 15px;
+    margin-bottom: 15px;
+    
+}
+
+.form-submit-button {
+    margin-bottom: 15px ;
 }
 
 .post-form-container {
@@ -66,7 +78,10 @@ body {
     flex-direction: column;
     margin-left: auto;
     margin-right: auto;
-    width:90%;
+    width: 90%;
+    border: 3px #8cbaff solid;
+    border-radius: 29px;
+    background-color: white;
 }
 
 .name-title-input {
@@ -74,20 +89,26 @@ body {
     flex-direction: row;
     width: 100%;
     margin-bottom: 5px;
+    margin-top: 15px;
 }
 
 #username-input {
     width: calc(30% - 5px);
     margin-right: 5px;
+    margin-left: 15px
+    
 }
 
 #title-input {
-    width: 70%;
+    width: 65%;
+    margin-right : 15px;
 }
 
 #description-input {
-    width: 100%;
+    width: 95%;
     margin-bottom: 5px;
+    margin-left: 15px;
+    margin-right: 15px;
 }
 
 .posts-container {
@@ -102,49 +123,71 @@ body {
     width: 90%;
     height: auto;
     margin: 5px;
-    /* border-radius: 5px;
-    border: 1px rgba(0, 0, 0, 0.12) solid; */
+    border-radius: 29px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+}
+
+.form-submit-button{
+    width: 95%;
+    margin-bottom: 15px;
+    margin-left: 15px;
+    margin-right: 15px;
+
 }
 
 .post-container {
     width: 100%;
     height: auto;
-    border-radius: 5px;
-    border: 1px rgba(0, 0, 0, 0.12) solid;
+    border-radius: 25px;
+    border: 3px #8cbaff solid;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    z-index:20;
+    z-index: 20 ;
+    background-color: white;
 }
 
 .post-container > h1 {
     font-size: 1.5em;
+    margin-left: 16px;
+    margin-top: 16px;
 }
 
 .post-container > span {
     font-size: 0.7em;
+    margin-left: 16px;
+    margin-top: 16px;
 }
 
 .post-container > p {
     font-size: 0.8em;
+    margin-left: 16px;
+    margin-top: 16px;
+    margin-bottom: 16px  
 }
 
 .answer-section {
     display: none;
     width: 100%;
-    border-radius: 5px;
+    border-radius: 29px;
     border: 1px rgba(0, 0, 0, 0.12) solid;
     z-index: 0;
     transform: translateY(-10px);
     padding-top: 10px;
+    background-color: #8cbaff;
 }
 
 .answer-container {
     display:flex;
     flex-direction: row;
+}
+
+.answer-container > div {
+    margin-left: 20px;
+    margin-right: 20px;
+
 }
 
 .answer-section[open] {
