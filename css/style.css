@@ -15,6 +15,77 @@ body {
     background-color: whitesmoke;
 }
 
+.landing-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    background-color: #8cbaff;
+}
+
+.landing-page-form-container {
+    display: flex;
+    flex-direction: column;
+    width: max(40%, 200px);
+    height: auto;
+    justify-content: center;
+    align-items: center;
+    background-color: azure;
+}
+
+.name-tag-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+}
+
+#landing-page-username-input {
+    width: 40%;
+    flex: 1;
+}
+
+#landing-page-tag-input {
+    width: 40%;
+    flex: 1;
+}
+
+.log-in-btn {
+    width: 100%;
+}
+
+.go-to-create-user-page-btn {
+    width: 100%;
+}
+
+.create-user-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    background-color: #8cbaff;
+}
+
+.create-user-form-container {
+    display: flex;
+    flex-direction: column;
+    width: max(20%, 200px);
+    height: auto;
+    justify-content: center;
+    align-items: center;
+    background-color: azure;
+}
+
+#create-user-page-username-input {
+    width: 100%;
+}
+
+.create-user-btn {
+    width: 100%;
+}
+
 .title {
     display: flex;
     height: 50px;
@@ -93,19 +164,19 @@ body {
     margin-top: 15px;
 }
 
-#username-input {
+#post-form-username-input {
     width: calc(30% - 5px);
     margin-right: 5px;
     margin-left: 15px
     
 }
 
-#title-input {
+#post-form-title-input {
     width: 65%;
     margin-right : 15px;
 }
 
-#description-input {
+#post-form-description-input {
     width: 95%;
     margin-bottom: 5px;
     margin-left: 15px;
@@ -258,7 +329,7 @@ body {
     flex-wrap: wrap;
 }
 
-.username-input {
+.answer-form-username-input {
     width: max(calc(20% - 5px), 50px);
     border: none;
 }
@@ -267,7 +338,7 @@ body {
     outline: none;
 }
 
-.answer-input {
+.answer-form-answer-input {
     width: max(80%, 100px);
     border: none;
 }
@@ -275,4 +346,8 @@ body {
 .answer-submit-button {
     width: 20%;
     cursor: pointer;
+}
+
+.hide {
+    display: none;
 }

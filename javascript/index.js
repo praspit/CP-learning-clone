@@ -6,6 +6,7 @@ import { generate_tag } from "./utility/tools.js"
 
 import {showAllChannelCtrl} from "./controller/channelCtrl.js"
 import { getPostDataFromStorage } from "./controller/postCtrl.js"
+import { goToLandingPage } from "./controller/pageCtrl.js"
 
 //getOnePost("BODLFokdmxix53c7ooIz")
 //getOnePostInChannel("q6HTTRc61ieJv6qcpVns", "BODLFokdmxix53c7ooIz")
@@ -20,12 +21,13 @@ import { getPostDataFromStorage } from "./controller/postCtrl.js"
 //getPostListInChannel("q6HTTRc61ieJv6qcpVns", "timestamp")
 //uploadNewUser(new User('prasrodo', generate_tag(), 'student'))
 
-async function test() {
-    let p = await getPostDataFromStorage("BODLFokdmxix53c7ooIz", "q6HTTRc61ieJv6qcpVns")
-    console.log(p)
-    let pp = await getPostDataFromStorage("BODLFokdmxix53c7ooIz", "q6HTTRc61ieJv6qcpVns")
-    console.log(pp)
-}
+// async function test() {
+//     let p = await getPostDataFromStorage("BODLFokdmxix53c7ooIz", "q6HTTRc61ieJv6qcpVns")
+//     console.log(p)
+//     let pp = await getPostDataFromStorage("BODLFokdmxix53c7ooIz", "q6HTTRc61ieJv6qcpVns")
+//     console.log(pp)
+// }
 //test()
 
-showAllChannelCtrl();
+// showAllChannelCtrl();
+goToLandingPage();
