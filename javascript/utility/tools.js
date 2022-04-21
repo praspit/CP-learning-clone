@@ -18,3 +18,8 @@ export function generate_tag() {
     }
     return code.toString()
 }
+
+export function valid_tag(tag) {
+    // is the string all numbers?
+    return /^[0-9]{4}$/.test(tag) && tag.length == 4;
+}
