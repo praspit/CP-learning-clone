@@ -15,12 +15,6 @@ import {
     serverTimestamp,
 
     addDoc,
-    // collection,
-    // deleteDoc,
-    // doc,
-    // getDoc,
-    // getDocs,
-    // getFirestore,
     updateDoc,
 } from "./firestore-init.js";
 

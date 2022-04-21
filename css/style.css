@@ -168,8 +168,9 @@ body {
 
 .post-container > span {
     font-size: 0.7em;
+    color :rgb(190, 188, 188);
     margin-left: 16px;
-    margin-top: 16px;
+    margin-top: 3px;
 }
 
 .post-container > p {
