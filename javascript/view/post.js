@@ -71,19 +71,19 @@ async function showAllAnswersInOnePost(channel_id, post_id) {
     answerFormContainer.classList = "answer-form-container";
     answerFormContainer.innerHTML = `
         <div class="name-answer-input">
-            <input type="text" id="username-input-${post_id}" class="username-input" name="userName" placeholder="Reply as" maxlength=20><span></span>
-            <input type="text" id="answer-input-${post_id}" class="answer-input" "name="answer" placeholder="Write your reply" maxlength=100>
+            <input type="text" id="username-input-${post_id}" class="answer-form-username-input" name="username" placeholder="Reply as" maxlength=20><span></span>
+            <input type="text" id="answer-input-${post_id}" class="answer-form-answer-input" "name="answer" placeholder="Write your reply" maxlength=100>
         </div>
     `
     let answerBtn = document.createElement('button');
     answerBtn.innerText = "Post";
     answerBtn.classList = "answer-submit-button"
     answerBtn.onclick = function() {
-        let userName = document.getElementById(`username-input-${post_id}`).value;
+        let username = document.getElementById(`username-input-${post_id}`).value;
         let answer = document.getElementById(`answer-input-${post_id}`).value;
 
-        if(userName && answer ){
-            uploadAnswer(channel_id, post_id, new Answer(userName, answer, post_id, false))
+        if(username && answer ){
+            uploadAnswer(channel_id, post_id, new Answer(username, answer, post_id, false))
             showAllAnswersInOnePost(channel_id, post_id);
         }else{
             console.log("please fills all the answer fields");
@@ -98,30 +98,30 @@ async function showAllAnswersInOnePost(channel_id, post_id) {
 export function showPostForm(channel_id) {
     postFormContainer.innerHTML = `
         <div class="name-title-input">
-            <input type="text" id="username-input" name="userName" placeholder="Post as" maxlength=20>
-            <input type="text" id="title-input" name="title" placeholder="Write your title" maxlength=100>
+            <input type="text" id="post-form-username-input" name="userName" placeholder="Post as" maxlength=20>
+            <input type="text" id="post-form-title-input" name="title" placeholder="Write your title" maxlength=100>
         </div>
-        <textarea rows="3" type="text" id="description-input" name="description" placeholder="Write your description" maxlength=200"></textarea>
+        <textarea rows="3" type="text" id="post-form-description-input" name="description" placeholder="Write your description" maxlength=200"></textarea>
     `
 
     let formSubmitBtn = document.createElement('button');
     formSubmitBtn.className = "form-submit-button";
     formSubmitBtn.innerText = "Post";
     formSubmitBtn.onclick = async function() {
-        let userName = document.getElementById("username-input").value;
-        let title = document.getElementById("title-input").value;
-        let description = document.getElementById("description-input").value;
-        if(userName && title && description){
+        let username = document.getElementById("post-form-username-input").value;
+        let title = document.getElementById("post-form-title-input").value;
+        let description = document.getElementById("post-form-description-input").value;
+        if(username && title && description){
             try {
-                await uploadPost(channel_id, new Post(userName, title, description, channel_id));
+                await uploadPost(channel_id, new Post(username, title, description, channel_id));
                 showPostsFromChannel(await getPostListInChannel(channel_id));
             }
             catch(err){
                 console.log(err);
             }
-            document.getElementById("username-input").value = '';
-            document.getElementById("title-input").value = '';
-            document.getElementById("description-input").value = '';
+            document.getElementById("post-form-username-input").value = '';
+            document.getElementById("post-form-title-input").value = '';
+            document.getElementById("post-form-description-input").value = '';
         }else{
             alert('please fills all the fields');
         }
