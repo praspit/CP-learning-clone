@@ -38,6 +38,7 @@ export {
   documentId,
   increment,
   arrayUnion,
+  arrayRemove,
     
     addDoc,
     // collection,

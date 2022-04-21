@@ -17,13 +17,8 @@ import {
     arrayUnion,
     
     addDoc,
-    // collection,
-    // deleteDoc,
-    // doc,
-    // getDoc,
-    // getDocs,
-    // getFirestore,
     updateDoc,
+    arrayRemove,
 } from "./firestore-init.js";
 
 function getPostRef(post_id, channel_id = ''){
@@ -93,6 +88,24 @@ export async function incrementPostUpvote(user_id, post_id, channel_id = '', amt
         upvoters: arrayUnion(user_id)
     })
     console.log('upvote incremented')
+    return true
+}
+
+export async function cancelUpvote(user_id, post_id, channel_id = ''){
+    let postRef = getPostRef(post_id, channel_id);
+    if(postRef.type === 'query'){
+        postRef = await getSingleDocRefFromQuery(postRef);
+    }
+    postSnap = await getDoc(postRef);
+    if(!postSnap.Data().upvoters.includes(user_id)){
+        console.log('not yet upvoted')
+        return false
+    }
+    await updateDoc(postRef, {
+        upvotes: increment(-1),
+        upvoters: arrayRemove(user_id)
+    })
+    console.log('upvote canceled')
     return true
 }
 
