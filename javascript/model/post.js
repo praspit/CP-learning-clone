@@ -48,7 +48,7 @@ export async function getOnePost(post_id) {
     if(postRef.type === 'query'){
         let postSnap = await getDocs(postRef);
         postSnap = postSnap.docs[0];
-        console.log(postSnap.id, ' => ', postSnap.data())
+        console.log(`getOnePost: ${postSnap.id}`)
         return postSnap.data()
     }
 }
@@ -56,7 +56,7 @@ export async function getOnePost(post_id) {
 export async function getOnePostInChannel(channel_id, post_id){
     let postRef = getPostRef(post_id, channel_id);
     let postSnap = await getDoc(postRef)
-    console.log(postSnap.id, ' => ', postSnap.data())
+    console.log(`getOnePostInChannel: ${postSnap.id}`)
     return postSnap.data()
 }
 
@@ -74,7 +74,7 @@ export async function getPostListInChannel(channel_id, sortBy='timestamp', onlyA
     }
     let postSnap = await getDocs(postRef)
     let posts = postSnap.docs.map(doc => doc.data());
-    console.log(posts)
+    console.log(`getPostListInChannel: ${posts.length}`)
     return posts
 }
 
@@ -86,13 +86,14 @@ export async function incrementPostUpvote(user_id, post_id, channel_id = '', amt
     postSnap = await getDoc(postRef);
     if(postSnap.Data().upvoters.includes(user_id)){
         console.log('already upvoted')
-        return
+        return false
     }
     await updateDoc(postRef, {
         upvotes: increment(amt),
         upvoters: arrayUnion(user_id)
     })
     console.log('upvote incremented')
+    return true
 }
 
 // you need to create post using the constructor in schema.js and pass it to this function

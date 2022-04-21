@@ -1,5 +1,5 @@
 import { serverTimestamp } from "./firestore-init.js";
-
+import { valid_name } from "../utility/tools.js";
 export class Reply {
     constructor(author, content) {
         this.author = author;
@@ -72,9 +72,15 @@ export class Post {
 }
 
 export class User {
-    constructor(username, tag, name, role){
+    constructor(username, tag, role='student') {
+        if(role != 'student' && role != 'teacher'){
+            throw new Error('role must be either student or teacher')
+        }
+        if(!valid_name(username)){
+            throw new Error('invalid username')
+        }
         this.username = username + '#' + tag;
-        this.name = name;
+        this.name = username;
         this.role = role;
         this.member_channels = [];
         this.created_posts = [];
