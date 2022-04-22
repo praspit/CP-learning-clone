@@ -1,22 +1,70 @@
-import { uploadPost, getOnePostInChannel, uploadAnswer, getPostListInChannel} from "../model/post.js";
+import { uploadPost, getOnePostInChannel, uploadAnswer, getPostListInChannel, incrementPostUpvote, cancelUpvote} from "../model/post.js";
 import { User, Post, Answer, Reply } from "../model/schema.js"
+import { updateUser } from "../controller/userCtrl.js" 
 
 let postsContainer = document.querySelector('.posts-container');
 let postFormContainer = document.querySelector('.post-form-container');
 
 export function showPostsFromChannel(posts) {
+    let user = JSON.parse(sessionStorage.getItem('user'));
+    let user_id = user.username;
     postsContainer.innerHTML = '';
     posts.forEach(post => {
         let postAndAnswerContainer = document.createElement('div');
         let postBtn = document.createElement('button');
-
-        postBtn.className = 'post-container';
-        postBtn.innerHTML = `
+        let postContainer = document.createElement('div');
+        postContainer.className = 'post-container';
+        postBtn.className = 'show-answers-btn';
+        postContainer.innerHTML = `
             <h1>${post.title}</h1>
-            <span>By ${post.author}</span>
+            <span class="post-author">By ${post.author}</span>
             <p>${post.description}</p>
-            <span>created at ${(new Date(post.timestamp.seconds * 1000)).toString()}</span>
         `
+
+        let likeBtn = document.createElement('button');
+        likeBtn.className = 'like-button';
+        likeBtn.setAttribute('likes', post.upvotes);
+        likeBtn.innerHTML = `
+            <svg class="heart-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M91.6 13A28.7 28.7 0 0 0 51 13l-1 1-1-1A28.7 28.7 0 0 0 8.4 53.8l1 1L50 95.3l40.5-40.6 1-1a28.6 28.6 0 0 0 0-40.6z"/></svg>
+            ${post.upvotes}
+        `
+        if(post.upvoters.includes(user_id)){
+            likeBtn.classList.add('liked');
+        }
+        likeBtn.onclick = async function() {       
+            if(likeBtn.classList.contains('liked')) {
+                
+                try {
+                    await cancelUpvote(user_id, post.uid, post.channel_id);
+                    likeBtn.classList.remove('liked');
+                    likeBtn.setAttribute('likes', parseInt(likeBtn.getAttribute('likes'))-1);
+                    likeBtn.innerHTML = `
+                        <svg class="heart-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M91.6 13A28.7 28.7 0 0 0 51 13l-1 1-1-1A28.7 28.7 0 0 0 8.4 53.8l1 1L50 95.3l40.5-40.6 1-1a28.6 28.6 0 0 0 0-40.6z"/></svg>
+                        ${likeBtn.getAttribute('likes')}
+                    `
+                }
+                catch(err) {
+                    console.log(err);
+                }
+            }
+            else {
+                try {
+                    await incrementPostUpvote(user_id, post.uid, post.channel_id);
+                    likeBtn.classList.add('liked');
+                    likeBtn.setAttribute('likes', parseInt(likeBtn.getAttribute('likes'))+1);
+                    likeBtn.innerHTML = `
+                        <svg class="heart-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M91.6 13A28.7 28.7 0 0 0 51 13l-1 1-1-1A28.7 28.7 0 0 0 8.4 53.8l1 1L50 95.3l40.5-40.6 1-1a28.6 28.6 0 0 0 0-40.6z"/></svg>
+                        ${likeBtn.getAttribute('likes')}
+                    `
+                }
+                catch(err) {
+                    console.log(err);
+                }
+            }
+            await updateUser(user_id);
+        }
+
+        postBtn.innerText = "show answers";
         postBtn.onclick = async function() {
             let answerSection = document.querySelector(`[data-uid="${post.uid}"]`).getElementsByClassName("answer-section")[0];
             if(answerSection.hasAttribute("open")){
@@ -44,7 +92,17 @@ export function showPostsFromChannel(posts) {
         let answerSection = document.createElement('div');
         answerSection.classList = "answer-section";
 
-        postAndAnswerContainer.appendChild(postBtn);
+        let likeAndPostBtnContainer = document.createElement('div');
+        likeAndPostBtnContainer.className = 'like-and-post-btn-container';
+        let postBtnContainer = document.createElement('span');
+        postBtnContainer.appendChild(postBtn);
+        let likeBtnContainer = document.createElement('span');
+        likeBtnContainer.appendChild(likeBtn);
+        likeAndPostBtnContainer.appendChild(likeBtnContainer);
+        likeAndPostBtnContainer.appendChild(postBtnContainer);
+
+        postContainer.appendChild(likeAndPostBtnContainer);
+        postAndAnswerContainer.appendChild(postContainer);
         postAndAnswerContainer.appendChild(answerSection);
         postAndAnswerContainer.classList = "post-answer-container"
         postAndAnswerContainer.dataset.uid = post.uid;

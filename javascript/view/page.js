@@ -29,7 +29,7 @@ export function initializeLandingPage() {
             let userExist = await getUser(`${username}#${tag}`);
             if(userExist){
                 sessionStorage.setItem('user', JSON.stringify(userExist));
-                document.getElementsByClassName('welcome-user')[0].innerHTML = `<h2>Welcome ${userExist.username}</h2>`
+                document.getElementsByClassName('welcome-user')[0].innerHTML = `<h2>Welcome, ${userExist.username}</h2>`
                 goToContentPage();
             }else{
                 console.log("user doesn't exist!");

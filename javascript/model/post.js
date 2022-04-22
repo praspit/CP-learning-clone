@@ -78,8 +78,12 @@ export async function incrementPostUpvote(user_id, post_id, channel_id = '', amt
     if(postRef.type === 'query'){
         postRef = await getSingleDocRefFromQuery(postRef);
     }
-    postSnap = await getDoc(postRef);
-    if(postSnap.Data().upvoters.includes(user_id)){
+    let postSnap = await getDoc(postRef);
+    if(!postSnap.exists()){
+        console.log(`incrementPostUpvote: post ${post_id} does not exist`)
+        return false
+    }
+    if(postSnap.data().upvoters.includes(user_id)){
         console.log('already upvoted')
         return false
     }
@@ -96,8 +100,12 @@ export async function cancelUpvote(user_id, post_id, channel_id = ''){
     if(postRef.type === 'query'){
         postRef = await getSingleDocRefFromQuery(postRef);
     }
-    postSnap = await getDoc(postRef);
-    if(!postSnap.Data().upvoters.includes(user_id)){
+    let postSnap = await getDoc(postRef);
+    if(!postSnap.exists()){
+        console.log(`incrementPostUpvote: post ${post_id} does not exist`)
+        return false
+    }
+    if(!postSnap.data().upvoters.includes(user_id)){
         console.log('not yet upvoted')
         return false
     }

@@ -244,7 +244,6 @@ body {
     align-items: flex-start;
     z-index: 20 ;
     background-color: white;
-    cursor: pointer;
 }
 
 .post-container > h1 {
@@ -253,7 +252,7 @@ body {
     margin-top: 16px;
 }
 
-.post-container > span {
+.post-author {
     font-size: 0.7em;
     color :rgb(190, 188, 188);
     margin-left: 16px;
@@ -265,6 +264,64 @@ body {
     margin-left: 16px;
     margin-top: 16px;
     margin-bottom: 16px  
+}
+
+.show-answers-btn {
+    margin-bottom: 15px;
+    border : none ;
+    background : none ;
+    cursor: pointer;
+}
+
+.show-answers-btn:hover {
+    transform: scale(1.014);
+    color :#8cbaff ;
+}
+
+.like-and-post-btn-container {
+    padding-left: 0.5em;
+}
+
+span + span {
+    margin-left: 0.5em;
+}
+
+.like-button {
+  color: #888;
+  font-size: 1em;
+  font-family: 'Heebo', sans-serif;
+  background-color: transparent;
+  border: 0.16em solid;
+  border-radius: 1em;
+  padding: 0.333em 0.5em 0.25em;
+  line-height: 1.2em;
+  /* box-shadow: 0 0.25em 1em -0.25em; */
+  cursor: pointer;
+  transition: color 150ms ease-in-out, background-color 150ms ease-in-out, transform 150ms ease-in-out;
+  outline: 0;
+
+}
+
+.heart-icon {
+    display: inline-block;
+    fill: currentColor;
+    width: 0.8em;
+    height: 0.8em;
+    margin-right: 0.2em;
+}
+
+.like-button:hover {
+    color: indianred;
+}
+
+.like-button:active {
+    transform: scale(0.95);
+}
+
+.liked {
+    color: #FFF;
+    background-color: indianred;
+    border-color: indianred;
 }
 
 .answer-section {
