@@ -96,24 +96,29 @@ animation-duration:5s;
     flex-direction: row;
     justify-content: center;
     width: 100%;
+    margin-bottom: 10px;
 }
 
 #landing-page-username-input {
     width: 40%;
     flex: 1;
+    border-radius: 4px;
 }
 
 #landing-page-tag-input {
     width: 40%;
     flex: 1;
+    border-radius: 4px;
 }
 
 .log-in-btn {
     width: 100%;
+    border-radius: 4px;
 }
 
 .go-to-create-user-page-btn {
     width: 100%;
+    border-radius: 4px;
 }
 
 .create-user-page {
@@ -136,14 +141,20 @@ animation-duration:5s;
     justify-content: center;
     align-items: center;
     background-color: azure;
+    border : 2px black solid;
+    border-radius: 10px;
+    padding : 2rem 4rem 2rem 4rem;
 }
 
 #create-user-page-username-input {
     width: 100%;
+    margin-bottom: 20px;
+    border-radius: 4px;
 }
 
 .create-user-btn {
     width: 100%;
+    border-radius: 4px;
 }
 
 .title {
