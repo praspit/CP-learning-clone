@@ -15,6 +15,8 @@ export function showPostsFromChannel(posts) {
         let postContainer = document.createElement('div');
         postContainer.className = 'post-container';
         postBtn.className = 'show-answers-btn';
+        postBtn.id = 'show-answers-btn-' + post.uid;
+        postBtn.setAttribute('value', post.answers.length);
         postContainer.innerHTML = `
             <h1>${post.title}</h1>
             <span class="post-author">By ${post.author}</span>
@@ -64,7 +66,7 @@ export function showPostsFromChannel(posts) {
             await updateUser(user_id);
         }
 
-        postBtn.innerText = "show answers";
+        postBtn.innerText = `show answers (${post.answers.length})`;
         postBtn.onclick = async function() {
             let answerSection = document.querySelector(`[data-uid="${post.uid}"]`).getElementsByClassName("answer-section")[0];
             if(answerSection.hasAttribute("open")){
@@ -111,6 +113,8 @@ export function showPostsFromChannel(posts) {
 }
 
 async function showAllAnswersInOnePost(channel_id, post_id) {
+    const user = JSON.parse(sessionStorage.getItem('user'));
+
     let answerSection = document.querySelector(`[data-uid="${post_id}"]`).getElementsByClassName("answer-section")[0];
     answerSection.innerHTML = '';
     let post = await getOnePostInChannel(channel_id, post_id);
@@ -130,8 +134,13 @@ async function showAllAnswersInOnePost(channel_id, post_id) {
     answerFormContainer.classList = "answer-form-container";
     answerFormContainer.innerHTML = `
         <div class="name-answer-input">
-            <input type="text" id="username-input-${post_id}" class="answer-form-username-input" name="username" placeholder="Reply as" maxlength=20><span></span>
-            <input type="text" id="answer-input-${post_id}" class="answer-form-answer-input" "name="answer" placeholder="Write your reply" maxlength=100>
+            <select class="answer-form-username-input" name="username" id="username-input-${post_id}">
+                <option value="" disabled selected>Reply as</option>
+                <option value=${user.username}>you</option>
+                <option value="anonymous">anonymous</option>
+            </select>
+            <span></span>
+            <input type="text" id="answer-input-${post_id}" class="answer-form-answer-input" "name="answer" placeholder=" Write your reply" maxlength=100>
         </div>
     `
     let answerBtn = document.createElement('button');
@@ -143,6 +152,11 @@ async function showAllAnswersInOnePost(channel_id, post_id) {
 
         if(username && answer ){
             uploadAnswer(channel_id, post_id, new Answer(username, answer, post_id, false))
+            .then(() => {
+                let showbtn = document.getElementById(`show-answers-btn-${post_id}`);
+                showbtn.setAttribute('value', parseInt(showbtn.getAttribute('value'))+1);
+                showbtn.innerText = `show answers (${showbtn.getAttribute('value')})`;
+            })
             showAllAnswersInOnePost(channel_id, post_id);
         }else{
             console.log("please fills all the answer fields");
@@ -155,13 +169,20 @@ async function showAllAnswersInOnePost(channel_id, post_id) {
 }
 
 export function showPostForm(channel_id) {
+    const user = JSON.parse(sessionStorage.getItem('user'));
     postFormContainer.innerHTML = `
         <div class="name-title-input">
-            <input type="text" id="post-form-username-input" name="userName" placeholder="Post as" maxlength=20>
-            <input type="text" id="post-form-title-input" name="title" placeholder="Write your title" maxlength=100>
+            <select name="userName" id="post-form-username-input">
+                <option value="" disabled selected>Post as</option>
+                <option value=${user.username}>you</option>
+                <option value="anonymous">anonymous</option>
+            </select>
+            
+            <input type="text" id="post-form-title-input" name="title" placeholder=" Write your title" maxlength=100>
         </div>
-        <textarea rows="3" type="text" id="post-form-description-input" name="description" placeholder="Write your description" maxlength=200"></textarea>
+        <textarea rows="3" type="text" id="post-form-description-input" name="description" placeholder=" Write your description" maxlength=200"></textarea>
     `
+    //<input type="text" id="post-form-username-input" name="userName" placeholder=" Post as" maxlength=20>
 
     let formSubmitBtn = document.createElement('button');
     formSubmitBtn.className = "form-submit-button";
