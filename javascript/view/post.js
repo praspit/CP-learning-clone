@@ -5,6 +5,14 @@ import { updateUser } from "../controller/userCtrl.js"
 let postsContainer = document.querySelector('.posts-container');
 let postFormContainer = document.querySelector('.post-form-container');
 
+function pressLike(likeBtn, amt){
+    likeBtn.setAttribute('likes', parseInt(likeBtn.getAttribute('likes'))+amt);
+    likeBtn.innerHTML = `
+        <svg class="heart-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M91.6 13A28.7 28.7 0 0 0 51 13l-1 1-1-1A28.7 28.7 0 0 0 8.4 53.8l1 1L50 95.3l40.5-40.6 1-1a28.6 28.6 0 0 0 0-40.6z"/></svg>
+        ${likeBtn.getAttribute('likes')}
+    `
+}
+
 export function showPostsFromChannel(posts) {
     let user = JSON.parse(sessionStorage.getItem('user'));
     let user_id = user.username;
@@ -36,33 +44,27 @@ export function showPostsFromChannel(posts) {
         likeBtn.onclick = async function() {       
             if(likeBtn.classList.contains('liked')) {
                 likeBtn.classList.remove('liked');
+                pressLike(likeBtn, -1);
                 try {
                     await cancelUpvote(user_id, post.uid, post.channel_id);
-                    
-                    likeBtn.setAttribute('likes', parseInt(likeBtn.getAttribute('likes'))-1);
-                    likeBtn.innerHTML = `
-                        <svg class="heart-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M91.6 13A28.7 28.7 0 0 0 51 13l-1 1-1-1A28.7 28.7 0 0 0 8.4 53.8l1 1L50 95.3l40.5-40.6 1-1a28.6 28.6 0 0 0 0-40.6z"/></svg>
-                        ${likeBtn.getAttribute('likes')}
-                    `
+
                 }
                 catch(err) {
                     likeBtn.classList.add('liked');
+                    pressLike(likeBtn, 1);
                     console.log(err);
                 }
             }
             else {
                 likeBtn.classList.add('liked');
+                pressLike(likeBtn, 1);
                 try {
-                    await incrementPostUpvote(user_id, post.uid, post.channel_id);
-                    
-                    likeBtn.setAttribute('likes', parseInt(likeBtn.getAttribute('likes'))+1);
-                    likeBtn.innerHTML = `
-                        <svg class="heart-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M91.6 13A28.7 28.7 0 0 0 51 13l-1 1-1-1A28.7 28.7 0 0 0 8.4 53.8l1 1L50 95.3l40.5-40.6 1-1a28.6 28.6 0 0 0 0-40.6z"/></svg>
-                        ${likeBtn.getAttribute('likes')}
-                    `
+                    await incrementPostUpvote(user_id, post.uid, post.channel_id);                    
+
                 }
                 catch(err) {
                     likeBtn.classList.remove('liked');
+                    pressLike(likeBtn, -1);
                     console.log(err);
                 }
             }
