@@ -223,12 +223,13 @@ animation-duration:5s;
 }
 
 .form-submit-button {
-    margin-bottom: 15px ;
+    margin-bottom: 20px ;
 }
 
 .form-submit-button:hover {
-    background-color:#A0EB9A;
+    background-color:#25d940;
     color: whitesmoke;
+    transform: scale(1.01);
 }
 
 .post-form-container {
@@ -283,6 +284,7 @@ animation-duration:5s;
     border-radius: 5px;
     background-color: #A0EB9A;
     cursor: pointer;
+    transition: color 150ms ease-in-out, background-color 150ms ease-in-out, transform 150ms ease-in-out;
 }
 
 .form-submit-button:active {
@@ -348,19 +350,32 @@ animation-duration:5s;
 }
 
 .show-answers-btn {
+    width: 80%;
+    height: 100%;
     margin-bottom: 15px;
-    border : none ;
-    background : none ;
+    margin-left: 30px;
+    border-radius: 15px;
+    background-color : #8cbaff;
+    border: none;
+    color: white;
     cursor: pointer;
 }
 
 .show-answers-btn:hover {
     transform: scale(1.014);
-    color :#8cbaff ;
+    background-color: #6aa2f6;
+    transition: color 150ms ease-in-out, background-color 150ms ease-in-out, transform 150ms ease-in-out;
+}
+
+.show-answers-btn:active {
+    transform: scale(0.98);
+    background-color: #6aa2f6;
+    transition: color 150ms ease-in-out, background-color 150ms ease-in-out, transform 150ms ease-in-out;
 }
 
 .like-and-post-btn-container {
     padding-left: 0.5em;
+    width: 100%;
 }
 
 span + span {
@@ -516,6 +531,20 @@ span + span {
     border-radius: 5px;
     border: 1px black solid;
     background-color: #a0eb9a;
+}
+
+.answer-submit-button:hover {
+    background-color: #25d940;
+    color: white;
+    transition: color 150ms ease-in-out, background-color 150ms ease-in-out, transform 150ms ease-in-out;
+    transform: scale(1.02)
+}
+
+.answer-submit-button:active {
+    background-color: #25d940;
+    color: white;
+    transition: color 150ms ease-in-out, background-color 150ms ease-in-out, transform 150ms ease-in-out;
+    transform: scale(0.97)
 }
 
 .hide {
