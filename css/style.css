@@ -24,30 +24,34 @@ body {
 }
 
 
+.bg {
+    animation:slide 3s ease-in-out infinite alternate;
+    background-image: linear-gradient(-60deg, #6c3 50%, #09f 50%);
+    bottom:0;
+    left:-50%;
+    opacity:.5;
+    position:fixed;
+    right:-50%;
+    top:0;
+    z-index:-1;
+}
+  
+.bg2 {
+animation-direction:alternate-reverse;
+animation-duration:4s;
+}
 
-@-webkit-keyframes animate {
-	from {background-position:0 0;}
-	to {background-position: 500px 0;}
+.bg3 {
+animation-duration:5s;
 }
- 
-@-moz-keyframes animate {
-	from {background-position:0 0;}
-	to {background-position: 500px 0;}
-}
- 
-@-ms-keyframes animate {
-	from {background-position:0 0;}
-	to {background-position: 500px 0;}
-}
- 
-@-o-keyframes animate {
-	from {background-position:0 0;}
-	to {background-position: 500px 0;}
-}
- 
-@keyframes animate {
-	from {background-position:0 0;}
-	to {background-position: 500px 0;}
+
+@keyframes slide {
+    0% {
+        transform:translateX(-25%);
+    }
+    100% {
+        transform:translateX(25%);
+    }
 }
 
 @keyframes gradient {
@@ -174,12 +178,12 @@ body {
     align-items: center;
     border-radius: 15px;
     background-color: whitesmoke;
-    border:2px dodgerblue solid;
+    border:2px #8cbaff solid;
     cursor: pointer;
 }
 
 .channel-container:hover {
-    background-color: dodgerblue;
+    background-color: #8cbaff;
     color: whitesmoke;
 }
 
@@ -209,6 +213,11 @@ body {
 
 .form-submit-button {
     margin-bottom: 15px ;
+}
+
+.form-submit-button:hover {
+    background-color:#A0EB9A;
+    color: whitesmoke;
 }
 
 .post-form-container {
