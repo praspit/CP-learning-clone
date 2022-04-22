@@ -27,7 +27,7 @@ export function showPostsFromChannel(posts) {
         postBtn.setAttribute('value', post.answers.length);
         postContainer.innerHTML = `
             <h1>${post.title}</h1>
-            <span class="post-author">By ${post.author}</span>
+            <span class="post-author">By ${post.author} | Posted on ${(new Date(post.timestamp.seconds * 1000).toLocaleString())}</span>
             <p>${post.description}</p>
         `
 
