@@ -5,8 +5,10 @@ import { User, Post, Answer, Reply } from "./model/schema.js"
 import { generate_tag } from "./utility/tools.js"
 
 import {showAllChannelCtrl} from "./controller/channelCtrl.js"
-import { getPostDataFromStorage } from "./controller/postCtrl.js"
-import { goToLandingPage } from "./controller/pageCtrl.js"
+import { getPostDataFromStorage, showPostsFromChannelCtrl } from "./controller/postCtrl.js"
+import { goToLandingPage, goToContentPage } from "./controller/pageCtrl.js"
+import { updateUser } from "./controller/userCtrl.js"
+import { showPostsFromChannel } from "./view/post.js"
 
 //getOnePost("BODLFokdmxix53c7ooIz")
 //getOnePostInChannel("q6HTTRc61ieJv6qcpVns", "BODLFokdmxix53c7ooIz")
@@ -28,9 +30,13 @@ import { goToLandingPage } from "./controller/pageCtrl.js"
 //     console.log(pp)
 // }
 //test()
-
 // showAllChannelCtrl();
-goToLandingPage();
+if ('user' in sessionStorage) {
+    updateUser(JSON.parse(sessionStorage.user).username);
+    goToContentPage();
+    
+}
+else goToLandingPage();
 
 // login automatically
 const auto_login = () => {

@@ -42,11 +42,12 @@ export function showPostsFromChannel(posts) {
             likeBtn.classList.add('liked');
         }
         likeBtn.onclick = async function() {       
+            let success = true
             if(likeBtn.classList.contains('liked')) {
                 likeBtn.classList.remove('liked');
                 pressLike(likeBtn, -1);
                 try {
-                    await cancelUpvote(user_id, post.uid, post.channel_id);
+                    success = await cancelUpvote(user_id, post.uid, post.channel_id);
 
                 }
                 catch(err) {
@@ -59,7 +60,7 @@ export function showPostsFromChannel(posts) {
                 likeBtn.classList.add('liked');
                 pressLike(likeBtn, 1);
                 try {
-                    await incrementPostUpvote(user_id, post.uid, post.channel_id);                    
+                    success = await incrementPostUpvote(user_id, post.uid, post.channel_id);                    
 
                 }
                 catch(err) {
