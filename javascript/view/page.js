@@ -28,6 +28,8 @@ export function initializeLandingPage() {
         if(valid_name(username) && valid_tag(tag)) {
             let userExist = await getUser(`${username}#${tag}`);
             if(userExist){
+                sessionStorage.setItem('user', JSON.stringify(userExist));
+                document.getElementsByClassName('welcome-user')[0].innerHTML = `<h2>Welcome ${userExist.username}</h2>`
                 goToContentPage();
             }else{
                 console.log("user doesn't exist!");
@@ -64,9 +66,15 @@ export function initializeCreateUserPage() {
     createUserBtn.onclick = async function() {
         let username = document.getElementById('create-user-page-username-input').value;
         if(valid_name(username)){
-            let userIsValid = await uploadNewUser(new User(username, generate_tag(), 'student'));
+            let newUser = new User(username, generate_tag(), 'student');
+            let userIsValid = await uploadNewUser(newUser);
             if(userIsValid){
+                let user = await getUser(`${username}#${newUser.tag}`);
+                sessionStorage.setItem('user', JSON.stringify(user));
+                document.getElementsByClassName('welcome-user')[0].innerHTML = `<h2>Welcome ${user.username}</h2>`
                 goToContentPage();
+            }else {
+                console.log('tag collision');   
             }
         }else{
             console.log('invalid username');

@@ -15,6 +15,7 @@ export function showPostsFromChannel(posts) {
             <h1>${post.title}</h1>
             <span>By ${post.author}</span>
             <p>${post.description}</p>
+            <span>created at ${(new Date(post.timestamp.seconds * 1000)).toString()}</span>
         `
         postBtn.onclick = async function() {
             let answerSection = document.querySelector(`[data-uid="${post.uid}"]`).getElementsByClassName("answer-section")[0];
