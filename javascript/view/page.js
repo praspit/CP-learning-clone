@@ -69,7 +69,7 @@ export function initializeCreateUserPage() {
             let newUser = new User(username, generate_tag(), 'student');
             let userIsValid = await uploadNewUser(newUser);
             if(userIsValid){
-                let user = await getUser(`${username}#${newUser.tag}`);
+                let user = await getUser(`${newUser.username}`);
                 sessionStorage.setItem('user', JSON.stringify(user));
                 document.getElementsByClassName('welcome-user')[0].innerHTML = `<h2>Welcome ${user.username}</h2>`
                 goToContentPage();

@@ -33,6 +33,9 @@ import { goToLandingPage } from "./controller/pageCtrl.js"
 goToLandingPage();
 
 // login automatically
-document.getElementById('landing-page-username-input').value = 'somying';
-document.getElementById('landing-page-tag-input').value = '1234';
-document.getElementsByClassName('log-in-btn')[0].click()
+const auto_login = () => {
+    document.getElementById('landing-page-username-input').value = 'somying';
+    document.getElementById('landing-page-tag-input').value = '1234';
+    document.getElementsByClassName('log-in-btn')[0].click()
+}
+
