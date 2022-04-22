@@ -35,10 +35,10 @@ export function showPostsFromChannel(posts) {
         }
         likeBtn.onclick = async function() {       
             if(likeBtn.classList.contains('liked')) {
-                
+                likeBtn.classList.remove('liked');
                 try {
                     await cancelUpvote(user_id, post.uid, post.channel_id);
-                    likeBtn.classList.remove('liked');
+                    
                     likeBtn.setAttribute('likes', parseInt(likeBtn.getAttribute('likes'))-1);
                     likeBtn.innerHTML = `
                         <svg class="heart-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M91.6 13A28.7 28.7 0 0 0 51 13l-1 1-1-1A28.7 28.7 0 0 0 8.4 53.8l1 1L50 95.3l40.5-40.6 1-1a28.6 28.6 0 0 0 0-40.6z"/></svg>
@@ -46,13 +46,15 @@ export function showPostsFromChannel(posts) {
                     `
                 }
                 catch(err) {
+                    likeBtn.classList.add('liked');
                     console.log(err);
                 }
             }
             else {
+                likeBtn.classList.add('liked');
                 try {
                     await incrementPostUpvote(user_id, post.uid, post.channel_id);
-                    likeBtn.classList.add('liked');
+                    
                     likeBtn.setAttribute('likes', parseInt(likeBtn.getAttribute('likes'))+1);
                     likeBtn.innerHTML = `
                         <svg class="heart-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M91.6 13A28.7 28.7 0 0 0 51 13l-1 1-1-1A28.7 28.7 0 0 0 8.4 53.8l1 1L50 95.3l40.5-40.6 1-1a28.6 28.6 0 0 0 0-40.6z"/></svg>
@@ -60,6 +62,7 @@ export function showPostsFromChannel(posts) {
                     `
                 }
                 catch(err) {
+                    likeBtn.classList.remove('liked');
                     console.log(err);
                 }
             }
