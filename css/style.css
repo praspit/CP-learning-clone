@@ -96,7 +96,13 @@ animation-duration:5s;
     flex-direction: row;
     justify-content: center;
     width: 100%;
-    margin-bottom: 10px;
+    
+}
+
+.login-error-container {
+    width: 100%;
+    color: red;
+    text-align: left;
 }
 
 #landing-page-username-input {
@@ -114,6 +120,7 @@ animation-duration:5s;
 .log-in-btn {
     width: 100%;
     border-radius: 4px;
+    margin-top: 10px;
 }
 
 .go-to-create-user-page-btn {
@@ -146,15 +153,26 @@ animation-duration:5s;
     padding : 2rem 4rem 2rem 4rem;
 }
 
+
+
 #create-user-page-username-input {
     width: 100%;
-    margin-bottom: 20px;
     border-radius: 4px;
 }
 
 .create-user-btn {
     width: 100%;
     border-radius: 4px;
+    margin-top: 15px;
+    
+}
+
+.back-to-login-btn {
+    position: relative;
+    width: 100%;
+    border-radius: 4px;
+    left: 0px;
+    
 }
 
 .title {
