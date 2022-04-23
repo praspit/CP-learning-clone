@@ -36,7 +36,7 @@ export async function getChannelsFromList(channel_list){
 }
 
 export async function getAllChannels(){
-    let q = collection(db, "channels");
+    let q = query(collection(db, "channels"), orderBy('channel_name'));
     let querySnapshot = await getDocs(q);
     let channels = querySnapshot.docs.map(doc => doc.data());
     console.log(`getAllChannels: ${channels.length}`);

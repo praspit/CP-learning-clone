@@ -19,6 +19,13 @@ export function showPostsFromChannel(posts) {
     let user_id = user.username;
 
     postsContainer.innerHTML = '';
+    if(posts.length == 0){
+        postsContainer.innerHTML = `
+            <div class="no-posts-container">
+                <h1>No posts to show</h1>
+            </div>
+        `
+    }
     posts.forEach(post => {
         let postAndAnswerContainer = document.createElement('div');
         let postBtn = document.createElement('button');

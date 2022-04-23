@@ -295,7 +295,7 @@ animation-duration:5s;
 }
 
 .sort-and-filter-container {
-    padding-left: 50px;
+    padding-left: 75px;
     display: flex;
     flex-direction: row;
 }
@@ -355,7 +355,10 @@ animation-duration:5s;
     transform: scale(0.98);
 }
 
-
+.no-posts-container {
+    margin-left: auto;
+    margin-right: auto;
+}
 
 .posts-container {
     width: 100%;
