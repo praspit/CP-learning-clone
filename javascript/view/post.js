@@ -28,8 +28,11 @@ export function showPostsFromChannel(posts) {
         postContainer.innerHTML = `
             <h1>${post.title}</h1>
             <span class="post-author">By ${post.author} | Posted on ${(new Date(post.timestamp.seconds * 1000).toLocaleString())}</span>
-            <p>${post.description}</p>
+            
         `
+        let postDescContainer = document.createElement('p');
+        postDescContainer.innerText = post.description;
+        postContainer.appendChild(postDescContainer);
 
         let likeBtn = document.createElement('button');
         likeBtn.className = 'like-button';
@@ -128,11 +131,12 @@ async function showAllAnswersInOnePost(channel_id, post_id) {
     post.answers.forEach(answer => {
         let answerContainer = document.createElement('div');
         answerContainer.classList = "answer-container";
-        answerContainer.innerHTML = `
-            <div>
-                ${answer.author}: ${answer.content}
-            </div>
-        `
+        let answerNameContainer = document.createElement('span');
+        let answerContentContainer = document.createElement('span');
+        answerNameContainer.innerText = answer.author + ': ';
+        answerContentContainer.innerText = answer.content;
+        answerContainer.appendChild(answerNameContainer);
+        answerContainer.appendChild(answerContentContainer);
         answerSection.appendChild(answerContainer);
     })
 
@@ -146,9 +150,11 @@ async function showAllAnswersInOnePost(channel_id, post_id) {
                 <option value="anonymous">anonymous</option>
             </select>
             <span></span>
-            <input type="text" id="answer-input-${post_id}" class="answer-form-answer-input" "name="answer" placeholder=" Write your reply" maxlength=100>
+            <textarea rows="1" type="text" id="answer-input-${post_id}" class="answer-form-answer-input" "name="answer" placeholder=" Write your reply" maxlength=100></textarea>
         </div>
     `
+    
+
     let answerBtn = document.createElement('button');
     answerBtn.innerText = "Post";
     answerBtn.classList = "answer-submit-button"
@@ -172,6 +178,13 @@ async function showAllAnswersInOnePost(channel_id, post_id) {
 
     answerSection.appendChild(answerFormContainer);
     answerSection.setAttribute("open","");
+
+    let answerInputArea = document.getElementById(`answer-input-${post_id}`);
+    answerInputArea.addEventListener('input', autoInputH, false);
+    function autoInputH(){
+        this.style.height = 'auto';
+        this.style.height = this.scrollHeight + 'px';
+    }
 }
 
 export function showPostForm(channel_id) {
@@ -213,4 +226,11 @@ export function showPostForm(channel_id) {
         }
     }
     postFormContainer.appendChild(formSubmitBtn);
+
+    let postInputArea = document.getElementById(`post-form-description-input`);
+    postInputArea.addEventListener('input', autoInputH, false);
+    function autoInputH(){
+        this.style.height = 'auto';
+        this.style.height = this.scrollHeight + 'px';
+    }
 }
