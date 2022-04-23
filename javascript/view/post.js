@@ -1,6 +1,7 @@
 import { uploadPost, getOnePostInChannel, uploadAnswer, getPostListInChannel, incrementPostUpvote, cancelUpvote} from "../model/post.js";
 import { User, Post, Answer, Reply } from "../model/schema.js"
 import { updateUser } from "../controller/userCtrl.js" 
+import { showPostsFromChannelCtrl } from "../controller/postCtrl.js";
 
 let postsContainer = document.querySelector('.posts-container');
 let postFormContainer = document.querySelector('.post-form-container');
@@ -16,6 +17,7 @@ function pressLike(likeBtn, amt){
 export function showPostsFromChannel(posts) {
     let user = JSON.parse(sessionStorage.getItem('user'));
     let user_id = user.username;
+
     postsContainer.innerHTML = '';
     posts.forEach(post => {
         let postAndAnswerContainer = document.createElement('div');
@@ -233,4 +235,28 @@ export function showPostForm(channel_id) {
         this.style.height = 'auto';
         this.style.height = this.scrollHeight + 'px';
     }
+}
+
+export function showSortAndFilterOptions(channel_id, sortBy) {
+    let sortAndFilterContainer = document.querySelector('.sort-and-filter-container');
+    sortAndFilterContainer.innerHTML = `
+        <div>
+            <h4>Sort By: </h4>
+        </div>
+        <div>
+            <select class="sort-by-input" name="sortby" id="sortby-input">
+                <option value="timestamp">Most Recent</option>
+                <option value="upvotes">Most upvoted</option>
+            </select>
+        </div>    
+    `;
+    let sortByInput = document.getElementById('sortby-input');
+    sortByInput.value = sortBy;
+    sortByInput.addEventListener('change', reshowPosts, false);
+
+    function reshowPosts(){
+        showPostsFromChannelCtrl(channel_id, sortByInput.value);
+        console.log(sortByInput.value);
+    }
+
 }

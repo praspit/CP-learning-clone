@@ -16,6 +16,7 @@ export function showAllChannels(channels) {
         btn.className = "channel-container";
         btn.onclick = function(){
             sessionStorage.setItem('currentChannel', JSON.stringify(channel));
+            document.getElementById('web-title').innerText = channel.channel_name;
             showPostsFromChannelCtrl(channel.uid);
         }
         btn.innerHTML = channel.channel_name;

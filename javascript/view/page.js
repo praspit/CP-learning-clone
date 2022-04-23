@@ -93,7 +93,7 @@ export function initializeCreateUserPage() {
     createUserFormContainer.appendChild(ORText);
 
     let goToLandingPageBtn = document.createElement('button');
-    goToLandingPageBtn.innerText = 'back';
+    goToLandingPageBtn.innerHTML = '&larr;';
     goToLandingPageBtn.classList = 'back-to-login-btn';
     goToLandingPageBtn.onclick = function() {
         goToLandingPage();

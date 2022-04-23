@@ -123,9 +123,25 @@ animation-duration:5s;
     margin-top: 10px;
 }
 
+.log-in-btn:hover {
+    background-color: rgb(222, 222, 222);
+}
+
+.log-in-btn:active {
+    transform: scale(0.96);
+}
+
 .go-to-create-user-page-btn {
     width: 100%;
     border-radius: 4px;
+}
+
+.go-to-create-user-page-btn:hover {
+    background-color: rgb(222, 222, 222);
+}
+
+.go-to-create-user-page-btn:active{
+    transform: scale(0.95);
 }
 
 .create-user-page {
@@ -167,12 +183,28 @@ animation-duration:5s;
     
 }
 
+.create-user-btn:hover {
+    background-color: rgb(222, 222, 222);
+}
+
+.create-user-btn:active{
+    transform: scale(0.96);
+}
+
 .back-to-login-btn {
     position: relative;
     width: 100%;
     border-radius: 4px;
     left: 0px;
     
+}
+
+.back-to-login-btn:hover {
+    background-color: rgb(222, 222, 222);
+}
+
+.back-to-login-btn:active{
+    transform: scale(0.96);
 }
 
 .title {
@@ -255,11 +287,24 @@ animation-duration:5s;
     flex-direction: column;
     margin-left: auto;
     margin-right: auto;
-    margin-bottom: 50px;
+    margin-bottom: 20px;
     width: 90%;
     border: 2px black solid;
     border-radius: 23px;
     background-color: #8cbaff;
+}
+
+.sort-and-filter-container {
+    padding-left: 50px;
+    display: flex;
+    flex-direction: row;
+}
+
+.sort-by-input {
+    margin-left: 20px;
+    border-radius: 6px;
+    margin-bottom: 10px;
+    border: 2px #000000 solid;
 }
 
 .answer-title {
@@ -309,6 +354,8 @@ animation-duration:5s;
 .form-submit-button:active {
     transform: scale(0.98);
 }
+
+
 
 .posts-container {
     width: 100%;

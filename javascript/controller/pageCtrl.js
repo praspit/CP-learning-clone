@@ -20,6 +20,7 @@ export function goToContentPage() {
     contentPage.classList.remove('hide');
     if('currentChannel' in sessionStorage) {
         let currentChannel = JSON.parse(sessionStorage.getItem('currentChannel'));
+        document.getElementById('web-title').innerText = currentChannel.channel_name;
         showPostsFromChannelCtrl(currentChannel.uid);
     }
 
