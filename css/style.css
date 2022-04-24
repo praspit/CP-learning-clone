@@ -355,8 +355,6 @@ animation-duration:5s;
     transform: scale(0.98);
 }
 
-
-
 .posts-container {
     width: 100%;
     height: auto;
@@ -380,7 +378,6 @@ animation-duration:5s;
     margin-bottom: 15px;
     margin-left: 15px;
     margin-right: 15px;
-
 }
 
 .post-container {
@@ -612,6 +609,15 @@ span + span {
     color: white;
     transition: color 150ms ease-in-out, background-color 150ms ease-in-out, transform 150ms ease-in-out;
     transform: scale(0.97)
+}
+
+.show-more-posts-btn {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    font-size: 1.1em;
 }
 
 .hide {
