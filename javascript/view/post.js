@@ -14,7 +14,7 @@ function pressLike(likeBtn, amt){
     `
 }
 
-export function showPostsFromChannel(posts) {
+export function showPostsFromChannel(posts, batch_size = 5) {
     let user = JSON.parse(sessionStorage.getItem('user'));
     let user_id = user.username;
 
@@ -26,7 +26,9 @@ export function showPostsFromChannel(posts) {
             </div>
         `
     }
-    posts.forEach(post => {
+    postsContainer.setAttribute('numberOfBatch', 1);
+
+    posts.forEach((post, index) => {
         let postAndAnswerContainer = document.createElement('div');
         let postBtn = document.createElement('button');
         let postContainer = document.createElement('div');
@@ -120,14 +122,43 @@ export function showPostsFromChannel(posts) {
         likeBtnContainer.appendChild(likeBtn);
         likeAndPostBtnContainer.appendChild(likeBtnContainer);
         likeAndPostBtnContainer.appendChild(postBtnContainer);
-
         postContainer.appendChild(likeAndPostBtnContainer);
+
         postAndAnswerContainer.appendChild(postContainer);
         postAndAnswerContainer.appendChild(answerSection);
         postAndAnswerContainer.classList = "post-answer-container"
+        //hide post if number of posts more than batch size
+        if(index >= batch_size){
+            postAndAnswerContainer.classList.add('hide');
+        }
         postAndAnswerContainer.dataset.uid = post.uid;
         postsContainer.appendChild(postAndAnswerContainer);
     });
+
+    //if number of posts doesn't exceed batch size, then no need for showMorePosts button
+    if(posts.length <= batch_size) return;
+
+    let showMorePostsBtn = document.createElement('button');
+    showMorePostsBtn.classList = 'show-more-posts-btn';
+    showMorePostsBtn.innerText = 'show more';
+    showMorePostsBtn.onclick = function() {
+        let batchBeginIndex = batch_size * parseInt(postsContainer.getAttribute('numberOfBatch'));
+        let batchEndIndex = (batch_size * (parseInt(postsContainer.getAttribute('numberOfBatch'))+1)) - 1;
+        let postAndAnswerContainerList = document.querySelectorAll('.post-answer-container');
+
+        postAndAnswerContainerList.forEach((postAndAnswerContainer, index)=>{
+            if(index < batchBeginIndex || index > batchEndIndex)return;
+
+            postAndAnswerContainer.classList.remove('hide');
+        })
+        postsContainer.setAttribute('numberOfBatch', (parseInt(postsContainer.getAttribute('numberOfBatch'))+1));
+
+        if (batchEndIndex+1 >= postAndAnswerContainerList.length){
+            showMorePostsBtn.classList.add('hide');
+        }
+    }
+
+    postsContainer.appendChild(showMorePostsBtn);
 }
 
 async function showAllAnswersInOnePost(channel_id, post_id) {
