@@ -34,17 +34,6 @@ export async function userExist(username){
     return userSnap.exists()
 }
 
-export async function getTime(){
-    let timerRef = doc(db, "timers", "timer1")
-    let timerSnap = await getDoc(timerRef)
-    console.log(timerSnap.data())
-    console.log(timerSnap.data().timer)
-    console.log(timerSnap.data().timer.seconds)
-    let time = serverTimestamp()
-    console.log(time)
-    return time
-}
-
 export async function uploadNewUser(user){
     user = user.toFirestore();
     let userRef = doc(db, `users/${user.username}`)
