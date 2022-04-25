@@ -38,7 +38,18 @@
         </div>
       </div>
     </div>
-    <div class="chat-tab-container">Chat</div>
+    <div class="chat-container">
+      <div class="chat-tab-container" id="chat-tab">Chat</div>
+      <button id="unsub-btn", class="hide"></button>
+      <div class="chat-window-container hide" id="chat-window">
+        <div class="chat-msg-container" id="chat-msg"></div>
+        <span class="chat-form-container">
+            <textarea name="chat" id="chat-input" cols="30" rows="1"></textarea>
+            <button id="chat-send">Send</button>
+        </span>
+      </div>
+    </div>
+    
   </body>
   <script type="module" src="../javascript/index.js"></script>
 

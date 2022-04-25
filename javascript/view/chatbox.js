@@ -1,30 +1,64 @@
-import { initChatbox } from "../controller/chatboxCtrl.js";
+import { initChatboxListener } from "../controller/chatboxCtrl.js";
 import { sendMessage } from "../model/chatbox.js";
 
-export function showChatBox(chat_id) {
-    let unsub = initChatbox(chat_id);
-    let body = document.getElementsByTagName("body")[0];
-    let chatboxContainer = document.createElement("div");
-    let chatForm = document.createElement("textarea");
-    chatForm.id = 'chat-form'
-    let chatSendBtn = document.createElement("button");
-    chatSendBtn.id = 'chat-send-btn'
-    chatSendBtn.innerHTML = 'Send'
-    chatSendBtn.onclick = () => {
-        sendMessage('somying#1234', chat_id, chatForm.value)
-        chatForm.value = ''
+export function initChatBox(chat_id) {
+    const user = JSON.parse(sessionStorage.getItem('user'));
+    const username = user.username;
+    const currentChannel = JSON.parse(sessionStorage.getItem('currentChannel'));
+
+    document.getElementById('unsub-btn').click();
+
+    let chat_tab = document.getElementById('chat-tab');
+    if(chat_tab.classList.contains('open-chat-tab')){
+        chat_tab.classList.remove('open-chat-tab');
+    }
+    chat_tab.innerHTML = `${currentChannel.channel_name} Live Chat &#x26AB;`;
+    let chatwindow = document.getElementById('chat-window');
+    if(!chatwindow.classList.contains('hide')){
+        chatwindow.classList.add('hide');
+    }
+    chat_tab.onclick = () => {
+        document.getElementById('chat-window').classList.toggle('hide');
+        document.getElementById('chat-tab').classList.toggle('open-chat-tab');
     }
 
-    let stopBtn = document.createElement("button");
-    stopBtn.innerHTML = 'Stop'
-    stopBtn.onclick = () => {
+    const chatbox = document.getElementById('chat-msg');
+    chatbox.innerHTML = '';
+    let unsub = initChatboxListener(chat_id);
+    let msg_input = document.getElementById('chat-input');
+    // msg_input.addEventListener('keydown', (e) => {
+    //     if (e.key === 'Enter') {
+    //         sendMessage(username, chat_id, msg_input.value);
+    //         msg_input.value = '';
+    //     }
+    // });
+    let send_btn = document.getElementById('chat-send');
+    send_btn.onclick = () => {
+        sendMessage(username, chat_id, msg_input.value);
+        msg_input.value = '';
+    }
+    document.getElementById('unsub-btn').onclick = () => {
         unsub();
-        console.log('unsubscribed')
     }
-
-    chatboxContainer.appendChild(chatForm);
-    chatboxContainer.appendChild(chatSendBtn);
-    chatboxContainer.appendChild(stopBtn);
-    chatboxContainer.style ='z-index: 12;'
-    body.appendChild(chatboxContainer);
 }
+
+
+export function showMsg(msg){
+    let msg_container = document.createElement("div");
+    let msg_author_container = document.createElement("div");
+    let msg_content_container = document.createElement("div");
+    msg_container.className = 'message-container'
+    msg_author_container.className = 'msg-author-container'
+    msg_content_container.className = 'msg-content-container'
+    msg_author_container.innerText = msg.author + ' : '
+    if(msg.author === JSON.parse(sessionStorage.getItem('user')).username){
+        msg_author_container.classList.add('own-msg-author');
+    }
+    msg_content_container.innerText = msg.content
+    msg_container.appendChild(msg_author_container);
+    msg_container.appendChild(msg_content_container);
+    document.getElementById('chat-msg').appendChild(msg_container);
+}
+
+
+

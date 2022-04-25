@@ -26,13 +26,13 @@ import {
 export async function sendMessage(user_id, chat_id, message){
     let messageRef = doc(db, `chatrooms/${chat_id}`)
     let messageSnap = await getDoc(messageRef)
-    if(messageSnap.exists()){
+    if(messageSnap.exists() && message != ''){
         await updateDoc(messageRef, {
             messages: arrayUnion({
                 author: user_id,
                 content: message,
                 timestamp: {
-                    seconds: Date.now() / 1000,
+                    seconds: Math.floor(Date.now() / 1000),
                 }
             })
         })

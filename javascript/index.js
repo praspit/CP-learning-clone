@@ -9,7 +9,7 @@ import { getPostDataFromStorage, showPostsFromChannelCtrl } from "./controller/p
 import { goToLandingPage, goToContentPage } from "./controller/pageCtrl.js"
 import { updateUser } from "./controller/userCtrl.js"
 import { showPostsFromChannel } from "./view/post.js"
-import { showChatBox } from "./view/chatbox.js"
+import { initChatBox } from "./view/chatbox.js"
 
 //getOnePost("BODLFokdmxix53c7ooIz")
 //getOnePostInChannel("q6HTTRc61ieJv6qcpVns", "BODLFokdmxix53c7ooIz")
@@ -50,4 +50,5 @@ const auto_login = () => {
 }
 auto_login();
 
-showChatBox('QeDJDqVJ0unC0cEglYsb')
+
+

@@ -1,3 +1,4 @@
+import { initChatBox } from "../view/chatbox.js";
 import { initializeLandingPage, initializeCreateUserPage } from "../view/page.js";
 import { showAllChannelCtrl } from "./channelCtrl.js";
 import { showPostsFromChannelCtrl } from "./postCtrl.js";
@@ -22,6 +23,7 @@ export function goToContentPage() {
         let currentChannel = JSON.parse(sessionStorage.getItem('currentChannel'));
         document.getElementById('web-title').innerText = currentChannel.channel_name;
         showPostsFromChannelCtrl(currentChannel.uid);
+        initChatBox(currentChannel.chat_id); //comment this if want to remove chat feature
     }
 
     showAllChannelCtrl();
