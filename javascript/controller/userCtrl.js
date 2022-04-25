@@ -2,6 +2,7 @@ import { getUser } from '../model/user.js';
 import { generate_tag } from '../utility/tools.js';
 import { uploadNewUser} from '../model/user.js';
 import { User } from '../model/schema.js';
+import { goToContentPage } from './pageCtrl.js';
 
 export async function autoUploadNewUser(username, role='student'){
     while(true){
