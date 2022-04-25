@@ -305,6 +305,17 @@ animation-duration:5s;
     border-radius: 6px;
     margin-bottom: 10px;
     border: 2px #000000 solid;
+    cursor: pointer;
+}
+
+.sort-by-input:hover{
+    background-color: #000000;
+    color: white;
+}
+
+.sort-by-input:hover > option{
+    background-color: white;
+    color: black;
 }
 
 .answer-title {
@@ -324,7 +335,18 @@ animation-duration:5s;
     width: calc(30% - 5px);
     margin-right: 5px;
     margin-left: 15px;
+    cursor: pointer;
 }
+#post-form-username-input:hover {
+    background-color: rgb(232, 229, 229);
+    color: black
+}
+
+
+#post-form-username-input:hover > option {
+    background-color: white;
+    color: black
+}     
 
 #post-form-title-input {
     border-radius: 5px;
@@ -418,15 +440,15 @@ animation-duration:5s;
 }
 
 .show-answers-btn {
-    width: 80%;
-    height: 100%;
+    width: 25%;
     margin-bottom: 15px;
-    margin-left: 30px;
+    margin-left: 10px;
     border-radius: 15px;
     background-color : #8cbaff;
     border: none;
     color: white;
     cursor: pointer;
+    align-items: center;
 }
 
 .show-answers-btn:hover {
@@ -442,7 +464,7 @@ animation-duration:5s;
 }
 
 .like-and-post-btn-container {
-    padding-left: 0.5em;
+    /* padding-left: 0.5em; */
     width: 100%;
 }
 
@@ -463,6 +485,7 @@ span + span {
   cursor: pointer;
   transition: color 150ms ease-in-out, background-color 150ms ease-in-out, transform 150ms ease-in-out;
   outline: 0;
+  margin-left: 15px;
 
 }
 
@@ -509,7 +532,7 @@ span + span {
     transform: translateY(-5px);
     padding-left: 5px;
     transform-origin: top;
-    background-color: #5E5E68;
+    background-color: #7f7f85;
     border-radius: 10px;
 }
 
@@ -581,6 +604,7 @@ span + span {
     width: max(calc(20% - 5px), 50px);
     margin-left: 10px;
     border-radius: 5px;
+    cursor: pointer;
 }
 
 :focus {
@@ -619,11 +643,28 @@ span + span {
 .show-more-posts-btn {
     margin-top: 10px;
     margin-bottom: 20px;
-    border: none;
-    background-color: transparent;
+    width: 15%;
+    height: 35px;
+    border: 1px black solid;
+    border-radius: 15px;
+    background-color: #8cbaff;
+    color: black;
     cursor: pointer;
     font-size: 1.1em;
 }
+
+.show-more-posts-btn:hover {
+    transform: scale(1.015);
+    background-color: #6aa2f6;
+    transition: color 150ms ease-in-out, background-color 150ms ease-in-out, transform 150ms ease-in-out;
+}
+
+.show-more-posts-btn:active {
+    transform: scale(0.98);
+    background-color: #6aa2f6;
+    transition: color 150ms ease-in-out, background-color 150ms ease-in-out, transform 150ms ease-in-out;
+}
+    
 
 .hide {
     display: none;
