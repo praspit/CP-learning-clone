@@ -618,6 +618,23 @@ span + span {
     transform: scale(0.97)
 }
 
+.chat-tab-container {
+    background-color: rgb(78, 78, 78);
+    font-size: 12px;
+  color: white;
+  padding-top: 5px;
+  padding-left: 20px;
+  border: none;
+  cursor: pointer;
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+  border-radius: 0px 10px 0px 0px;
+  width: 400px;
+  height: 30px;
+  text-align: left;
+}
+
 .hide {
     display: none;
 }

@@ -41,10 +41,13 @@ else goToLandingPage();
 
 // login automatically
 const auto_login = () => {
+    if('user' in sessionStorage){
+        return
+    }
     document.getElementById('landing-page-username-input').value = 'somying';
     document.getElementById('landing-page-tag-input').value = '1234';
     document.getElementsByClassName('log-in-btn')[0].click()
 }
-
+auto_login();
 
 showChatBox('QeDJDqVJ0unC0cEglYsb')

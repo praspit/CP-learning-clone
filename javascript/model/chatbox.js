@@ -41,5 +41,16 @@ export async function sendMessage(user_id, chat_id, message){
         console.log('Invalid chat_id')
     }
 }
+
+export async function getMessages(chat_id){
+    let messageRef = doc(db, `chatrooms/${chat_id}`)
+    let messageSnap = await getDoc(messageRef)
+    if(messageSnap.exists()){
+        console.log(`Messages retrieved from ${chat_id}`)
+        return messageSnap.data().messages
+    }else{
+        console.log('Invalid chat_id')
+    }
+}
     
 
