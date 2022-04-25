@@ -10,9 +10,9 @@
   <div class="bg"></div>
   <div class="bg bg2"></div>
   <div class="bg bg3"></div>
-  <body >
-    <div class="landing-page"></div>
-    <div class="create-user-page"></div>
+  <body>
+    <div class="landing-page" style="z-index: 2;"></div>
+    <div class="create-user-page" style="z-index: 3;"></div>
     <div class="content-page">
       <div class="title">
         <h1>Welcome to "CP Learning"</h1>
@@ -38,6 +38,18 @@
         </div>
       </div>
     </div>
+    <div class="chat-container">
+      <div class="chat-tab-container" id="chat-tab">Chat</div>
+      <button id="unsub-btn", class="hide"></button>
+      <div class="chat-window-container hide" id="chat-window">
+        <div class="chat-msg-container" id="chat-msg"></div>
+        <span class="chat-form-container">
+            <textarea name="chat" id="chat-input" cols="30" rows="1"></textarea>
+            <button id="chat-send">Send</button>
+        </span>
+      </div>
+    </div>
+    
   </body>
   <script type="module" src="../javascript/index.js"></script>
 

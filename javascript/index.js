@@ -1,6 +1,6 @@
 import { getChannelsFromList, uploadAnnouncement } from "./model/channel.js"
 import { getOnePost, getOnePostInChannel, getPostListInChannel, incrementPostUpvote, uploadPost, uploadAnswer } from "./model/post.js"
-import { getUser, getTime, uploadNewUser, matchTeacherPassword } from "./model/user.js"
+import { getUser, uploadNewUser, matchTeacherPassword } from "./model/user.js"
 import { User, Post, Answer, Reply, Announcement } from "./model/schema.js"
 import { generate_tag } from "./utility/tools.js"
 
@@ -9,6 +9,7 @@ import { getPostDataFromStorage, showPostsFromChannelCtrl } from "./controller/p
 import { goToLandingPage, goToContentPage } from "./controller/pageCtrl.js"
 import { updateUser } from "./controller/userCtrl.js"
 import { showPostsFromChannel } from "./view/post.js"
+import { initChatBox } from "./view/chatbox.js"
 
 //getOnePost("BODLFokdmxix53c7ooIz")
 //getOnePostInChannel("q6HTTRc61ieJv6qcpVns", "BODLFokdmxix53c7ooIz")
@@ -40,10 +41,16 @@ else goToLandingPage();
 
 // login automatically
 const auto_login = () => {
+    if('user' in sessionStorage){
+        return
+    }
     document.getElementById('landing-page-username-input').value = 'somying';
     document.getElementById('landing-page-tag-input').value = '1234';
     document.getElementsByClassName('log-in-btn')[0].click()
 }
+auto_login();
+
+
 
 
 //uploadAnnouncement("q6HTTRc61ieJv6qcpVns", new Announcement("somying#1234", "hello world"))
