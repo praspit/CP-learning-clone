@@ -88,7 +88,7 @@ animation-duration:5s;
     background-color: azure;
     border : 2px black solid;
     border-radius: 10px;
-    padding : 5rem 10rem 5rem 10rem;
+    padding : 5% 10%;
 }
 
 .name-tag-container {
@@ -96,7 +96,6 @@ animation-duration:5s;
     flex-direction: row;
     justify-content: center;
     width: 100%;
-    
 }
 
 .login-error-container {
@@ -159,21 +158,38 @@ animation-duration:5s;
 .create-user-form-container {
     display: flex;
     flex-direction: column;
-    width: max(20%, 200px);
+    width: max(40%, 200px);
     height: auto;
     justify-content: center;
     align-items: center;
     background-color: azure;
     border : 2px black solid;
     border-radius: 10px;
-    padding : 2rem 4rem 2rem 4rem;
+    padding : 5% 10%;
 }
-
-
 
 #create-user-page-username-input {
     width: 100%;
     border-radius: 4px;
+}
+
+.teacher-login-checkbox-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0.4em;
+    margin-top: 0.5em;
+}
+
+.teacher-login-checkbox-container > input {
+    margin-top: 1px;
+}
+
+#teacher-login-password {
+    width: 100%;
+    border-radius: 4px;
+    flex: 1;
 }
 
 .create-user-btn {

@@ -1,7 +1,8 @@
 import { goToContentPage, goToCreateUserPage, goToLandingPage } from '../controller/pageCtrl.js';
-import { getUser, uploadNewUser } from '../model/user.js';
+import { getUser, uploadNewUser, matchTeacherPassword } from '../model/user.js';
 import {valid_name, valid_tag, generate_tag} from '../utility/tools.js';
 import { User, Post, Answer, Reply } from "../model/schema.js"
+import { autoUploadNewUser } from '../controller/userCtrl.js';
 
 let landingPage = document.querySelector('.landing-page');
 let createUserPage  = document.querySelector('.create-user-page');
@@ -62,6 +63,11 @@ export function initializeCreateUserPage() {
     createUserFormContainer.innerHTML = `
         <input type="text" id="create-user-page-username-input" name="name" placeholder="name" maxlength=20>
         <div class="login-error-container" id="create-user-error"></div>
+        <div class="teacher-login-checkbox-container">
+            <input type="checkbox" id="teacher-checkbox" name="teacherCheckbox">
+            <h3>Log in as teacher</h3>
+        </div>
+        <input type="password" id="teacher-login-password" class="hide" name="teacherLoginPassword" placeholder="Teacher's password">
     `
 
     let createUserBtn = document.createElement('button');
@@ -69,21 +75,28 @@ export function initializeCreateUserPage() {
     createUserBtn.classList = 'create-user-btn';
     createUserBtn.onclick = async function() {
         let username = document.getElementById('create-user-page-username-input').value;
-        if(valid_name(username)){
-            let newUser = new User(username, generate_tag(), 'student');
-            let userIsValid = await uploadNewUser(newUser);
-            if(userIsValid){
-                let user = await getUser(`${newUser.username}`);
-                sessionStorage.setItem('user', JSON.stringify(user));
-                document.getElementsByClassName('welcome-user')[0].innerHTML = `<h2>Welcome ${user.username}</h2>`
-                goToContentPage();
+        let teacherCheckbox = document.getElementById('teacher-checkbox');
+        let teacherLoginPassword = document.querySelector('#teacher-login-password').value;
+        
+        if(teacherCheckbox.checked){
+            if(await matchTeacherPassword(teacherLoginPassword)){
+                if(valid_name(username)){
+                    autoUploadNewUser(username, 'teacher');
+                }else {
+                    document.getElementById('create-user-error').innerText = 'invalid username';
+                    console.log('invalid username');
+                }
             }else {
-                
-                console.log('tag collision');   
+                document.getElementById('create-user-error').innerText = 'invalid teacher\'s password';
+                console.log('invalid teacher\'s password');
             }
         }else{
-            document.getElementById('create-user-error').innerText = 'invalid username';
-            console.log('invalid username');
+            if(valid_name(username)){
+                autoUploadNewUser(username, 'student')
+            }else {
+                document.getElementById('create-user-error').innerText = 'invalid username';
+                console.log('invalid username');
+            }
         }
     }
     createUserFormContainer.appendChild(createUserBtn);
@@ -102,4 +115,16 @@ export function initializeCreateUserPage() {
     createUserFormContainer.appendChild(goToLandingPageBtn);
 
     createUserPage.appendChild(createUserFormContainer);
+
+    let teacherCheckbox = document.getElementById('teacher-checkbox');
+    teacherCheckbox.onclick = function(){
+        let teacherLoginPasswordContainer = document.querySelector('#teacher-login-password');
+        document.querySelector('#teacher-login-password').value = '';
+
+        if(teacherCheckbox.checked){
+            teacherLoginPasswordContainer.classList.remove('hide');
+        }else{
+            teacherLoginPasswordContainer.classList.add('hide');
+        }
+    }
 }

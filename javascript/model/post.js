@@ -142,3 +142,8 @@ export async function uploadAnswer(channel_id, post_id, answer){
     let postSnap = await getDoc(postRef);
     console.log('answer uploaded => post id ',postRef.id, postSnap.data().answers)
 }
+
+export async function deletePost(channel_id, post_id){
+    await deleteDoc(doc(db, `channels/${channel_id}/posts/${post_id}`))
+    console.log('post deleted')
+}
