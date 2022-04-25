@@ -685,7 +685,7 @@ span + span {
 .chat-tab-container {
   background-color: rgb(78, 78, 78);
   font-size: 12px;
-  text-align: left;
+  text-align: right;
   color: greenyellow;
   padding-top: 5px;
   padding-left: 20px;

@@ -48,7 +48,7 @@ const auto_login = () => {
     document.getElementById('landing-page-tag-input').value = '1234';
     document.getElementsByClassName('log-in-btn')[0].click()
 }
-auto_login();
+
 
 
 

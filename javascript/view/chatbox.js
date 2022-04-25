@@ -6,13 +6,18 @@ export function initChatBox(chat_id) {
     const username = user.username;
     const currentChannel = JSON.parse(sessionStorage.getItem('currentChannel'));
 
+    let chatContainer = document.querySelector('.chat-container');
+    if(chatContainer.classList.contains('hide')) {
+        chatContainer.classList.remove('hide');
+    }
+
     document.getElementById('unsub-btn').click();
 
     let chat_tab = document.getElementById('chat-tab');
     if(chat_tab.classList.contains('open-chat-tab')){
         chat_tab.classList.remove('open-chat-tab');
     }
-    chat_tab.innerHTML = `${currentChannel.channel_name} Live Chat &#x26AB;`;
+    chat_tab.innerHTML = `${currentChannel.channel_name} Live Chat &#x25CF;`;
     let chatwindow = document.getElementById('chat-window');
     if(!chatwindow.classList.contains('hide')){
         chatwindow.classList.add('hide');
