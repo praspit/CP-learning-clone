@@ -57,3 +57,12 @@ export async function uploadNewUser(user){
     console.log(`User ${user.username} added`)
     return true
 }
+
+export async function matchTeacherPassword(pwd) {
+    let pwdref = doc(db, `teacher_pwd/${pwd}`)
+    let pwdSnap = await getDoc(pwdref)
+    if(!pwdSnap.exists()){
+        return false
+    }
+    else return true
+}

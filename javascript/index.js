@@ -1,6 +1,6 @@
 import { getChannelsFromList, uploadAnnouncement } from "./model/channel.js"
 import { getOnePost, getOnePostInChannel, getPostListInChannel, incrementPostUpvote, uploadPost, uploadAnswer } from "./model/post.js"
-import { getUser, getTime, uploadNewUser } from "./model/user.js"
+import { getUser, getTime, uploadNewUser, matchTeacherPassword } from "./model/user.js"
 import { User, Post, Answer, Reply, Announcement } from "./model/schema.js"
 import { generate_tag } from "./utility/tools.js"
 
@@ -24,12 +24,12 @@ import { showPostsFromChannel } from "./view/post.js"
 //uploadNewUser(new User('prasrodo', generate_tag(), 'student'))
 
 // async function test() {
-//     let p = await getPostDataFromStorage("BODLFokdmxix53c7ooIz", "q6HTTRc61ieJv6qcpVns")
+//     let p = await matchTeacherPassword('1234')
 //     console.log(p)
-//     let pp = await getPostDataFromStorage("BODLFokdmxix53c7ooIz", "q6HTTRc61ieJv6qcpVns")
+//     let pp = await matchTeacherPassword('cee123')
 //     console.log(pp)
 // }
-//test()
+// test()
 // showAllChannelCtrl();
 if ('user' in sessionStorage) {
     updateUser(JSON.parse(sessionStorage.user).username);
