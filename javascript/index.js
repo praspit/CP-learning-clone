@@ -1,7 +1,7 @@
-import { getChannelsFromList } from "./model/channel.js"
+import { getChannelsFromList, uploadAnnouncement } from "./model/channel.js"
 import { getOnePost, getOnePostInChannel, getPostListInChannel, incrementPostUpvote, uploadPost, uploadAnswer } from "./model/post.js"
 import { getUser, getTime, uploadNewUser } from "./model/user.js"
-import { User, Post, Answer, Reply } from "./model/schema.js"
+import { User, Post, Answer, Reply, Announcement } from "./model/schema.js"
 import { generate_tag } from "./utility/tools.js"
 
 import {showAllChannelCtrl} from "./controller/channelCtrl.js"
@@ -45,3 +45,5 @@ const auto_login = () => {
     document.getElementsByClassName('log-in-btn')[0].click()
 }
 
+
+//uploadAnnouncement("q6HTTRc61ieJv6qcpVns", new Announcement("somying#1234", "hello world"))

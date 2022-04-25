@@ -44,6 +44,19 @@ export class Answer {
     }
 }
 
+export class Announcement {
+    constructor(author, content) {
+        this.author = author;
+        this.content = content;
+    }
+    toFirestore() {
+        return {
+            author : this.author,
+            content : this.content,
+        }
+    }
+}
+
 export class Post {
     constructor(author, title, description, channel_id) {
         this.author = author;

@@ -625,6 +625,10 @@ span + span {
     font-size: 1.1em;
 }
 
+.show-more-posts-btn:hover {
+    color: dodgerblue;
+}
+
 .hide {
     display: none;
 }
