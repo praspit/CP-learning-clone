@@ -60,6 +60,7 @@ export function initializeLandingPage() {
 }
 
 export function initializeCreateUserPage() {
+    document.querySelector('.create-user-page').innerHTML = '';
     let createUserFormContainer = document.createElement('div');
     createUserFormContainer.classList = 'create-user-form-container';
     createUserFormContainer.innerHTML = `
@@ -148,6 +149,7 @@ export function showWelcomeUser(username) {
             document.querySelector('.nav-bar').innerHTML = '';
             document.querySelector('.sort-and-filter-container').innerHTML = '';
             document.querySelector(".channel-title").innerHTML = '';
+            document.querySelector('.create-user-page').innerHTML = '';
             goToLandingPage();
             sessionStorage.removeItem('user');
             if('currentChannel' in sessionStorage){
