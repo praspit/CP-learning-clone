@@ -62,9 +62,6 @@ export function showAnnouncementForm() {
     let user = JSON.parse(sessionStorage.getItem('user'));
 
     if(user.role === 'teacher'){
-        document.querySelector('.announcement-form-title').innerHTML = `
-            <h2>Post Announcement Here...<h2>
-        `
         document.querySelector('.announcement-form-title').classList.remove('hide');
 
         let announcementFormContainer = document.querySelector('.announcement-form-container');
