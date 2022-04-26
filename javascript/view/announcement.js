@@ -1,3 +1,7 @@
+import { uploadAnnouncement } from '../model/channel.js';
+import { Announcement } from '../model/schema.js';
+import { showAnnoucementsFromChannelCtrl } from '../controller/announcementCtrl.js';
+
 let announcementsContainer = document.querySelector('.announcements-container');
 
 export function showAnnoucementsFromChannel(announcements) {
@@ -77,6 +81,17 @@ export function showAnnouncementForm() {
         let announcementSubmitBtn = document.createElement('button');
         announcementSubmitBtn.classList = 'announcement-submit-btn';
         announcementSubmitBtn.innerText = 'Announce';
+        announcementSubmitBtn.onclick = async function(){
+            let channel = JSON.parse(sessionStorage.getItem('currentChannel'));
+            let content = announcementInputArea.value;
+            if(content.length === 0){
+                alert('Please fills all the fields');
+            }else {
+                await uploadAnnouncement(channel.uid, new Announcement(user.name, content));
+                announcementInputArea.value = '';
+                showAnnoucementsFromChannelCtrl(channel.uid);
+            }
+        }
         announcementFormContainer.appendChild(announcementSubmitBtn);   
     }
 }
