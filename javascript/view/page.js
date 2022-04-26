@@ -10,6 +10,7 @@ let createUserPage  = document.querySelector('.create-user-page');
 export function initializeLandingPage() {
     landingPage.innerHTML = `
     <div class="landing-page-form-container">
+        <div class="web-name-container">CP Learning</div>
         <div class="name-tag-container">
             <input type="text" id="landing-page-username-input" name="name" placeholder="name" maxlength=20>
             #
@@ -31,7 +32,7 @@ export function initializeLandingPage() {
             let userExist = await getUser(`${username}#${tag}`);
             if(userExist){
                 sessionStorage.setItem('user', JSON.stringify(userExist));
-                document.getElementsByClassName('welcome-user')[0].innerHTML = `<h2>Welcome, ${userExist.username}</h2>`
+                showWelcomeUser(userExist.username);
                 goToContentPage();
             }else{
                 document.getElementById('login-error').innerText = 'user doesn\'t exist!';
@@ -125,6 +126,27 @@ export function initializeCreateUserPage() {
             teacherLoginPasswordContainer.classList.remove('hide');
         }else{
             teacherLoginPasswordContainer.classList.add('hide');
+        }
+    }
+}
+
+export function showWelcomeUser(username) {
+    document.getElementsByClassName('welcome-user')[0].innerHTML = `
+        <span class="welcome-text">
+            Welcome, ${username} |
+        </span>
+        <span>
+            <button id="logout-btn">Log Out</button>
+        </span>
+    `;
+    let logoutBtn = document.getElementById('logout-btn');
+    logoutBtn.onclick = function() {
+        if(window.confirm('Are you sure you want to log out?')){
+            goToLandingPage();
+            sessionStorage.removeItem('user');
+            if('currentChannel' in sessionStorage){
+                sessionStorage.removeItem('currentChannel');
+            }
         }
     }
 }

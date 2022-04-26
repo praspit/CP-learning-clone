@@ -2,6 +2,7 @@ import { initChatBox } from "../view/chatbox.js";
 import { initializeLandingPage, initializeCreateUserPage } from "../view/page.js";
 import { showAllChannelCtrl } from "./channelCtrl.js";
 import { showPostsFromChannelCtrl } from "./postCtrl.js";
+import { showWelcomeUser } from "../view/page.js";
 
 let landingPage = document.querySelector('.landing-page');
 let contentPage = document.querySelector('.content-page');
@@ -19,6 +20,7 @@ export function goToContentPage() {
     landingPage.classList.add('hide');
     createUserPage.classList.add('hide')
     contentPage.classList.remove('hide');
+    showWelcomeUser(JSON.parse(sessionStorage.getItem('user')).username)
     if('currentChannel' in sessionStorage) {
         let currentChannel = JSON.parse(sessionStorage.getItem('currentChannel'));
         document.getElementById('web-title').innerText = currentChannel.channel_name;

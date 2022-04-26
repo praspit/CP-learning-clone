@@ -9,6 +9,10 @@
     z-index: 0;
 }
 
+@font-face {
+    font-family: home_to_rome;
+    src: url('../fonts/home_to_rome.ttf');
+}
 
 body {
     width: 100%;
@@ -89,7 +93,14 @@ animation-duration:5s;
     background-color: azure;
     border : 2px black solid;
     border-radius: 10px;
-    padding : 5% 10%;
+    padding : 2% 5% 3% 5%;
+}
+
+.web-name-container {
+    margin: auto;
+    font-family: home_to_rome;
+    font-size: 4rem;
+    margin-bottom: 3%;
 }
 
 .name-tag-container {
@@ -224,12 +235,67 @@ animation-duration:5s;
     transform: scale(0.96);
 }
 
-.title {
+.title-container {
+    padding-top: 0.2em;
+    padding-bottom: 0.2em;
+    margin-bottom: 1em;
+    background-color: rgba(0, 0, 0, 0.12);
+    border-bottom: 2px black dashed;
+}
+
+.title-inner-container {
+    margin: auto;
+    width: fit-content;
     display: flex;
+}
+
+.flower-emoji-left {
+    margin-left: auto;
+}
+
+.flower-emoji-right {
+    margin-right: auto;
+}
+
+.title {
     height: 50px;
-    justify-content: center;
-    align-items: center;
-    
+    text-align: center;
+    font-size: 3rem;
+    font-family: home_to_rome;
+    height: fit-content;
+    width: fit-content;
+    cursor: pointer;
+    padding: 10px 0px 10px 10px;
+}
+
+.welcome-user {
+    padding-bottom: 1.2em;
+    padding-right: 0.8em;
+    padding-left: 0.8em;
+}
+
+.welcome-text {
+    width: fit-content;
+    font-weight: bold;
+}
+
+#logout-btn {
+    width: fit-content;
+    border: none;
+    background: none;
+    font-weight: bold;
+    color: rgb(201, 74, 74);
+    cursor: pointer;
+
+    /* dont need to make border and background, it looks better in text button */
+}
+
+#logout-btn:hover {
+    color: #FFFFFF;
+}
+
+#logout-btn:active {
+    transform: scale(0.96);
 }
 
 .main-page {
@@ -282,6 +348,10 @@ animation-duration:5s;
     margin-left: 15px;
     margin-bottom: 15px;
     width: calc(100% - 15px);
+    font-size: 2rem;
+    font-weight: bold;
+    text-decoration: underline;
+    padding-left: 50px;
 }
 
 .post-title {
@@ -369,6 +439,8 @@ animation-duration:5s;
     border-radius: 5px;
     width: 65%;
     margin-right : 15px;
+    padding-left: 0.8%;
+    padding-right: 0.8%;
 }
 
 #post-form-description-input {
@@ -379,6 +451,8 @@ animation-duration:5s;
     margin-right: 15px;
     margin-top: 10px;
     resize: vertical;
+    padding-left: 0.8%;
+    padding-right: 0.8%;
 }
 
 .form-submit-button {
@@ -633,6 +707,8 @@ span + span {
     border-radius: 5px;
     margin-left: 20px;
     resize: vertical;
+    padding-left: 0.7%;
+    padding-right: 0.7%;
 }
 
 .answer-submit-button {
@@ -733,6 +809,7 @@ span + span {
     color: white;
     z-index: 14;
     margin-bottom: 10px;
+    background: transparent;
 }
 
 .msg-author-container {

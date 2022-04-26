@@ -6,8 +6,7 @@ let channelContainer = document.querySelector(".nav-bar");
 
 export function showChannelTitle(channel) {
     channelTitle.innerHTML = `
-        <h2>${channel.channel_name}</h2>
-        <span>${channel.owner}</span>
+        ${channel.channel_name}
         `
 }
 

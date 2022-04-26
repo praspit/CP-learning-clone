@@ -190,7 +190,7 @@ async function showAllAnswersInOnePost(channel_id, post_id) {
                 <option value="anonymous">anonymous</option>
             </select>
             <span></span>
-            <textarea rows="1" type="text" id="answer-input-${post_id}" class="answer-form-answer-input" "name="answer" placeholder=" Write your reply" maxlength=100></textarea>
+            <textarea rows="1" type="text" id="answer-input-${post_id}" class="answer-form-answer-input" "name="answer" placeholder="Write your reply" maxlength=100></textarea>
         </div>
     `
     
@@ -237,9 +237,9 @@ export function showPostForm(channel_id) {
                 <option value="anonymous">anonymous</option>
             </select>
             
-            <input type="text" id="post-form-title-input" name="title" placeholder=" Write your title" maxlength=100>
+            <input type="text" id="post-form-title-input" name="title" placeholder="Write your title" maxlength=100>
         </div>
-        <textarea rows="3" type="text" id="post-form-description-input" name="description" placeholder=" Write your description" maxlength=200"></textarea>
+        <textarea rows="3" type="text" id="post-form-description-input" name="description" placeholder="Write your description" maxlength=200"></textarea>
     `
     //<input type="text" id="post-form-username-input" name="userName" placeholder=" Post as" maxlength=20>
 
