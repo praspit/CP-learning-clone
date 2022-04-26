@@ -147,7 +147,7 @@ export function showWelcomeUser(username) {
             document.querySelector('.posts-container').innerHTML = '';
             document.querySelector('.nav-bar').innerHTML = '';
             document.querySelector('.sort-and-filter-container').innerHTML = '';
-            document.querySelector(".channel-title");
+            document.querySelector(".channel-title").innerHTML = '';
             goToLandingPage();
             sessionStorage.removeItem('user');
             if('currentChannel' in sessionStorage){
