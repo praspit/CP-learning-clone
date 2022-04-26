@@ -1,21 +1,8 @@
 import {
     db,
-    app,
 	doc,
 	getDoc,
-	getDocs,
-	collection,
-	query,
 	setDoc,
-	deleteDoc,
-    collectionGroup,
-    where,
-    limit,
-    orderBy,
-    serverTimestamp,
-
-    addDoc,
-    updateDoc,
 } from "./firestore-init.js";
 
 export async function getUser(username){
@@ -24,7 +11,7 @@ export async function getUser(username){
     if(!userSnap.exists()){
         return null
     }
-    console.log(userSnap.id, ' => ', userSnap.data())
+    console.log(getUser, username)
     return userSnap.data()
 }
 

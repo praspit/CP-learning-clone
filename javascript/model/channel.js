@@ -1,21 +1,14 @@
 import {
     db,
-    app,
 	doc,
 	getDoc,
 	getDocs,
 	collection,
 	query,
-	setDoc,
-	deleteDoc,
-    collectionGroup,
     where,
-    limit,
     orderBy,
-    serverTimestamp,
     documentId,
-    
-    addDoc,
+
     updateDoc,
     arrayUnion,
 } from "./firestore-init.js";

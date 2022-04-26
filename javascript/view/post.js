@@ -116,7 +116,6 @@ export function showPostsFromChannel(posts, batch_size = 5) {
             }else{
                 try {
                     let p = await getOnePostInChannel(post.channel_id, post.uid);
-                    console.log(p);
                     showAllAnswersInOnePost(post.channel_id, post.uid);
                 } catch(err) {
                     console.log(`can't get post ${post.channel_id} from channel ${post.uid}`, '\n', err);
@@ -312,7 +311,7 @@ export function showSortAndFilterOptions(channel_id, sortBy) {
 
     function reshowPosts(){
         showPostsFromChannelCtrl(channel_id, sortByInput.value);
-        console.log(sortByInput.value);
+        console.log('sort by', sortByInput.value);
     }
 
 }
