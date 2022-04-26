@@ -62,14 +62,13 @@ export function showAnnouncementForm() {
     let user = JSON.parse(sessionStorage.getItem('user'));
 
     if(user.role === 'teacher'){
-        document.querySelector('.announcement-form-title').innerHTML = `
-            <h2>Post Announcement Here...<h2>
-        `
+        document.querySelector('.announcement-form-title').classList.remove('hide');
 
         let announcementFormContainer = document.querySelector('.announcement-form-container');
         announcementFormContainer.innerHTML = `
             <textarea rows="1" type="text" id="announcement-form-content-input" name="content" placeholder="Write your announcement" maxlength=200" spellcheck="false"></textarea>
         `;
+        document.querySelector('.announcement-form-container').classList.remove('hide');
 
         let announcementInputArea = document.getElementById(`announcement-form-content-input`);
         announcementInputArea.addEventListener('input', autoInputH, false);
