@@ -434,6 +434,7 @@ animation-duration:5s;
     align-items: flex-start;
     z-index: 20 ;
     background-color: white;
+    position: relative;
 }
 
 .post-container > h1 {
@@ -454,6 +455,25 @@ animation-duration:5s;
     margin-left: 16px;
     margin-top: 16px;
     margin-bottom: 16px  
+}
+
+.delete-post-btn {
+    position: absolute;
+    right: 1em;
+    top: 1em;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    transform: scale(110%);
+}
+
+.delete-icon {
+    fill: currentColor;
+}
+
+.delete-post-btn:hover {
+    transform: scale(120%);
+    color: darkred;
 }
 
 .show-answers-btn {
