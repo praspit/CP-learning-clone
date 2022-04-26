@@ -3,7 +3,7 @@ import { getUser, uploadNewUser, matchTeacherPassword } from '../model/user.js';
 import {valid_name, valid_tag, generate_tag} from '../utility/tools.js';
 import { User, Post, Answer, Reply } from "../model/schema.js"
 import { autoUploadNewUser } from '../controller/userCtrl.js';
-import { unhideElements } from './channel.js';
+import { hideElements, unhideElements } from './channel.js';
 
 let landingPage = document.querySelector('.landing-page');
 let createUserPage  = document.querySelector('.create-user-page');
@@ -143,7 +143,11 @@ export function showWelcomeUser(username) {
     let logoutBtn = document.getElementById('logout-btn');
     logoutBtn.onclick = function() {
         if(window.confirm('Are you sure you want to log out?')){
+            hideElements();
+            document.querySelector('.posts-container').innerHTML = '';
             document.querySelector('.nav-bar').innerHTML = '';
+            document.querySelector('.sort-and-filter-container').innerHTML = '';
+            document.querySelector(".channel-title");
             goToLandingPage();
             sessionStorage.removeItem('user');
             if('currentChannel' in sessionStorage){

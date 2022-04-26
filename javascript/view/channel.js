@@ -59,3 +59,34 @@ export function unhideElements() {
         ansTitle.classList.remove('hide');
     }
 }
+
+export function hideElements() {
+    let postTitle = document.querySelector(".post-title");
+    let ansTitle = document.querySelector(".answer-title");
+    let annTitle = document.querySelector(".announcement-title");
+    let postform = document.querySelector(".post-form-container");
+    let annnouncements = document.querySelector(".announcements-container");
+    let annformtitle = document.querySelector(".announcement-form-title");
+    let annform = document.querySelector(".announcement-form-container");
+    if(!annformtitle.classList.contains('hide')){
+        annformtitle.classList.add('hide');
+    }
+    if(!annform.classList.contains('hide')){
+        annform.classList.add('hide');
+    }
+    if(!annnouncements.classList.contains('hide')) {
+        annnouncements.classList.add('hide');
+    }
+    if(!postform.classList.contains('hide')) {
+        postform.classList.add('hide');
+    }
+    if(!annTitle.classList.contains('hide')){
+        annTitle.classList.add('hide');
+    }
+    if(!postTitle.classList.contains('hide')) {
+        postTitle.classList.add('hide');
+    }
+    if(!ansTitle.classList.contains('hide')) {
+        ansTitle.classList.add('hide');
+    }
+}

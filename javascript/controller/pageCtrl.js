@@ -15,6 +15,12 @@ export function goToLandingPage() {
     createUserPage.classList.add('hide')
     landingPage.classList.remove('hide');
     document.getElementById('web-title').innerText = 'CP Learning';
+    let chat = document.querySelector('.chat-container');
+    if(!chat.classList.contains('hide')){
+        chat.classList.add('hide');
+    }
+    document.getElementById('chat-msg').innerHTML = '';
+    document.getElementById('unsub-btn').click();
 
     initializeLandingPage();
 }
