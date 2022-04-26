@@ -334,6 +334,11 @@ animation-duration:5s;
     color: whitesmoke;
 }
 
+.channel-btn-selected {
+    background-color: #8cbaff;
+    color: whitesmoke;
+}
+
 .channel-container:active {
     transform: scale(98%);
 }

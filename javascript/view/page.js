@@ -143,6 +143,7 @@ export function showWelcomeUser(username) {
     let logoutBtn = document.getElementById('logout-btn');
     logoutBtn.onclick = function() {
         if(window.confirm('Are you sure you want to log out?')){
+            document.querySelector('.nav-bar').innerHTML = '';
             goToLandingPage();
             sessionStorage.removeItem('user');
             if('currentChannel' in sessionStorage){
