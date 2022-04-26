@@ -1,6 +1,8 @@
 let announcementsContainer = document.querySelector('.announcements-container');
 
 export function showAnnoucementsFromChannel(announcements) {
+    showAnnouncementForm();
+
     announcementsContainer.innerHTML = '';
     announcementsContainer.setAttribute('index', 0);
     announcements.forEach(announcement => {
@@ -50,5 +52,31 @@ export function showAnnoucementsFromChannel(announcements) {
     btn_container.appendChild(btn_prev);
     btn_container.appendChild(btn_next);
     announcementsContainer.appendChild(btn_container);
+}
 
+export function showAnnouncementForm() {
+    let user = JSON.parse(sessionStorage.getItem('user'));
+
+    if(user.role === 'teacher'){
+        document.querySelector('.announcement-form-title').innerHTML = `
+            <h2>Post Announcement Here...<h2>
+        `
+
+        let announcementFormContainer = document.querySelector('.announcement-form-container');
+        announcementFormContainer.innerHTML = `
+            <textarea rows="1" type="text" id="announcement-form-content-input" name="content" placeholder="Write your announcement" maxlength=200" spellcheck="false"></textarea>
+        `;
+
+        let announcementInputArea = document.getElementById(`announcement-form-content-input`);
+        announcementInputArea.addEventListener('input', autoInputH, false);
+        function autoInputH(){
+            this.style.height = 'auto';
+            this.style.height = this.scrollHeight + 'px';
+        }
+
+        let announcementSubmitBtn = document.createElement('button');
+        announcementSubmitBtn.classList = 'announcement-submit-btn';
+        announcementSubmitBtn.innerText = 'Announce';
+        announcementFormContainer.appendChild(announcementSubmitBtn);   
+    }
 }
