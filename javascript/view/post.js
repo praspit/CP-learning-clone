@@ -1,4 +1,4 @@
-import { uploadPost, getOnePostInChannel, uploadAnswer, getPostListInChannel, incrementPostUpvote, cancelUpvote} from "../model/post.js";
+import { uploadPost, getOnePostInChannel, uploadAnswer, getPostListInChannel, incrementPostUpvote, cancelUpvote, deletePost} from "../model/post.js";
 import { User, Post, Answer, Reply } from "../model/schema.js"
 import { updateUser } from "../controller/userCtrl.js" 
 import { showPostsFromChannelCtrl } from "../controller/postCtrl.js";
@@ -39,8 +39,19 @@ export function showPostsFromChannel(posts, batch_size = 5) {
         postContainer.innerHTML = `
             <h1>${post.title}</h1>
             <span class="post-author">By ${post.author} | Posted on ${(new Date(post.timestamp.seconds * 1000).toLocaleString())}</span>
-            
         `
+
+        if(user.role === 'teacher'){
+            let deleteBtn = document.createElement('button');
+            deleteBtn.classList = 'delete-post-btn';
+            deleteBtn.innerHTML = `<svg class="delete-icon" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>`
+            deleteBtn.onclick = async function() {;
+                await deletePost(post.channel_id, post.uid);
+                showPostsFromChannelCtrl(JSON.parse(sessionStorage.getItem('currentChannel')).uid);
+            }
+            postContainer.appendChild(deleteBtn);
+        }
+        
         let postDescContainer = document.createElement('p');
         postDescContainer.innerText = post.description;
         postContainer.appendChild(postDescContainer);

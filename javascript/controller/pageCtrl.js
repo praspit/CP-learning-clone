@@ -3,6 +3,7 @@ import { initializeLandingPage, initializeCreateUserPage } from "../view/page.js
 import { showAllChannelCtrl } from "./channelCtrl.js";
 import { showPostsFromChannelCtrl } from "./postCtrl.js";
 import { showWelcomeUser } from "../view/page.js";
+import {showAnnoucementsFromChannelCtrl} from "./announcementCtrl.js";
 
 let landingPage = document.querySelector('.landing-page');
 let contentPage = document.querySelector('.content-page');
@@ -25,6 +26,7 @@ export function goToContentPage() {
         let currentChannel = JSON.parse(sessionStorage.getItem('currentChannel'));
         document.getElementById('web-title').innerText = currentChannel.channel_name;
         showPostsFromChannelCtrl(currentChannel.uid);
+        showAnnoucementsFromChannelCtrl(currentChannel.uid);
         initChatBox(currentChannel.chat_id); //comment this if want to remove chat feature
     }
 
