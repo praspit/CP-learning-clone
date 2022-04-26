@@ -1,3 +1,4 @@
+import { showAnnoucementsFromChannelCtrl } from "../controller/announcementCtrl.js";
 import { showPostsFromChannelCtrl } from "../controller/postCtrl.js";
 import { initChatBox } from "./chatbox.js";
 
@@ -19,6 +20,7 @@ export function showAllChannels(channels) {
             sessionStorage.setItem('currentChannel', JSON.stringify(channel));
             document.getElementById('web-title').innerText = channel.channel_name;
             initChatBox(channel.chat_id); //comment this if want to remove chat feature
+            showAnnoucementsFromChannelCtrl(channel.uid)
             showPostsFromChannelCtrl(channel.uid);
         }
         btn.innerHTML = channel.channel_name;
