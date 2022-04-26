@@ -25,7 +25,6 @@ export class Answer {
             seconds : Date.now() / 1000,
         }
         this.from_teacher = from_teacher;
-        this.replies = [];
         this.post_id = post_id;
         this.upvotes = 0;
         this.upvoters = [];
@@ -36,7 +35,6 @@ export class Answer {
             content : this.content,
             from_teacher : this.from_teacher,
             timestamp : this.timestamp,
-            replies : this.replies,
             post_id : this.post_id,
             upvotes : this.upvotes,
             upvoters : this.upvoters
@@ -95,16 +93,12 @@ export class User {
         this.username = username + '#' + tag;
         this.name = username;
         this.role = role;
-        this.member_channels = [];
-        this.created_posts = [];
     }
     toFirestore() {
         return {
             username : this.username,
             name : this.name,
             role : this.role,
-            member_channels : this.member_channels,
-            created_posts : this.created_posts
         }
     }
 }

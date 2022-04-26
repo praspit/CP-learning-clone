@@ -127,7 +127,7 @@ export async function uploadPost(channel_id, post){
         uid: postRef.id
     })
     let postSnap = await getDoc(postRef);
-    console.log('post uploaded => ', postSnap.data())
+    console.log('post uploaded')
 }
 
 export async function uploadAnswer(channel_id, post_id, answer){
@@ -140,7 +140,7 @@ export async function uploadAnswer(channel_id, post_id, answer){
         answers : arrayUnion(answer)
     })
     let postSnap = await getDoc(postRef);
-    console.log('answer uploaded => post id ',postRef.id, postSnap.data().answers)
+    console.log('answer uploaded')
 }
 
 export async function deletePost(channel_id, post_id){

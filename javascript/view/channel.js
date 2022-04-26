@@ -16,6 +16,19 @@ export function showAllChannels(channels) {
         let btn = document.createElement('button')
         btn.className = "channel-container";
         btn.onclick = function(){
+            let postTitle = document.querySelector(".post-title");
+            let ansTitle = document.querySelector(".answer-title");
+            let annTitle = document.querySelector(".announcement-title");
+            if(annTitle.classList.contains('hide')){
+                annTitle.classList.remove('hide');
+            }
+            if(postTitle.classList.contains('hide')) {
+                postTitle.classList.remove('hide');
+            }
+            if(ansTitle.classList.contains('hide')) {
+                ansTitle.classList.remove('hide');
+            }
+
             sessionStorage.setItem('currentChannel', JSON.stringify(channel));
             document.getElementById('web-title').innerText = channel.channel_name;
             initChatBox(channel.chat_id); //comment this if want to remove chat feature
