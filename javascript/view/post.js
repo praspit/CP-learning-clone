@@ -184,7 +184,11 @@ async function showAllAnswersInOnePost(channel_id, post_id) {
         answerContainer.classList = "answer-container";
         let answerNameContainer = document.createElement('span');
         let answerContentContainer = document.createElement('span');
-        answerNameContainer.innerText = answer.author + ': ';
+        let authorName = answer.author + ': ';
+        if(answer.from_teacher){
+            authorName = '💡 ' + answer.author + ': ';
+        }
+        answerNameContainer.innerHTML = authorName;
         answerContentContainer.innerText = answer.content;
         answerContainer.appendChild(answerNameContainer);
         answerContainer.appendChild(answerContentContainer);
@@ -214,7 +218,8 @@ async function showAllAnswersInOnePost(channel_id, post_id) {
         let answer = document.getElementById(`answer-input-${post_id}`).value;
 
         if(username && answer ){
-            uploadAnswer(channel_id, post_id, new Answer(username, answer, post_id, false))
+            let reply_from_teacher = user.role === 'teacher' && username != 'anonymous';; 
+            uploadAnswer(channel_id, post_id, new Answer(username, answer, post_id, reply_from_teacher))
             .then(() => {
                 let showbtn = document.getElementById(`show-answers-btn-${post_id}`);
                 showbtn.setAttribute('value', parseInt(showbtn.getAttribute('value'))+1);
@@ -222,7 +227,7 @@ async function showAllAnswersInOnePost(channel_id, post_id) {
             })
             showAllAnswersInOnePost(channel_id, post_id);
         }else{
-            console.log("please fills all the answer fields");
+            alert("please fills all the answer fields");
         }
     }
     answerFormContainer.appendChild(answerBtn);

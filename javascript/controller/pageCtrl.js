@@ -13,6 +13,7 @@ export function goToLandingPage() {
     contentPage.classList.add('hide');
     createUserPage.classList.add('hide')
     landingPage.classList.remove('hide');
+    document.getElementById('web-title').innerText = 'CP Learning';
 
     initializeLandingPage();
 }
