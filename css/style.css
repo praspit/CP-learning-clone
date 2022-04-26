@@ -355,8 +355,66 @@ animation-duration:5s;
     padding-left: 50px;
 }
 
+.announcement-title {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
 .announcements-container {
-    padding-left: 50px;
+    padding: 15px 25px 5px 25px;
+    display: flex;
+    flex-direction: column;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 25px;
+    width: 90%;
+    border: 2px black solid;
+    border-radius: 23px;
+    background-color: #444444;
+    color: white;
+}
+
+.announcement-container {
+    font-size: 0.9rem;
+}
+
+.ann-author-container {
+    font-size: inherit;
+    color :#09f;
+}
+
+.ann-content-container {
+    font-size: inherit;
+    padding-left: 40px;
+}
+
+.announcement-btn-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.announcement-btn {
+    margin-left: 1em;
+    margin-right: 1em;
+    width: fit-content;
+    border: none;
+    background: none;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+
+    /* dont need to make border and background, it looks better in text button */
+}
+
+.announcement-btn:hover {
+    color: dodgerblue;
+}
+
+.announcement-btn:active {
+    transform: scale(0.96);
 }
 
 .post-title {
