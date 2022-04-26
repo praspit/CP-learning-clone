@@ -11,7 +11,7 @@ export async function getUser(username){
     if(!userSnap.exists()){
         return null
     }
-    console.log(getUser, username)
+    console.log('getUser', username)
     return userSnap.data()
 }
 

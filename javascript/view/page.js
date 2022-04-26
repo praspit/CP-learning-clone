@@ -3,6 +3,7 @@ import { getUser, uploadNewUser, matchTeacherPassword } from '../model/user.js';
 import {valid_name, valid_tag, generate_tag} from '../utility/tools.js';
 import { User, Post, Answer, Reply } from "../model/schema.js"
 import { autoUploadNewUser } from '../controller/userCtrl.js';
+import { unhideElements } from './channel.js';
 
 let landingPage = document.querySelector('.landing-page');
 let createUserPage  = document.querySelector('.create-user-page');
