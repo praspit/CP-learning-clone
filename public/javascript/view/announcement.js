@@ -6,7 +6,8 @@ let announcementsContainer = document.querySelector('.announcements-container');
 
 export function showAnnoucementsFromChannel(announcements) {
     showAnnouncementForm();
-
+    announcements.sort(function(a, b){ return b.timestamp.seconds - a.timestamp.seconds });
+    console.log(announcements);
     announcementsContainer.innerHTML = '';
     announcementsContainer.setAttribute('index', 0);
     announcements.forEach(announcement => {
