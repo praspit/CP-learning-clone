@@ -7,6 +7,8 @@ import { hideElements, unhideElements } from './channel.js';
 
 let landingPage = document.querySelector('.landing-page');
 let createUserPage  = document.querySelector('.create-user-page');
+const click_sfx = document.getElementById('sfx');
+
 
 export function initializeLandingPage() {
     landingPage.innerHTML = `
@@ -27,6 +29,7 @@ export function initializeLandingPage() {
     logInBtn.classList = 'log-in-btn';
     logInBtn.innerText = 'Log in';
     logInBtn.onclick = async function() {
+        click_sfx.play();
         let username = document.getElementById('landing-page-username-input').value;
         let tag = document.getElementById('landing-page-tag-input').value;
         if(valid_name(username) && valid_tag(tag)) {
@@ -54,6 +57,7 @@ export function initializeLandingPage() {
     goToCreateUserPageBtn.innerText = 'Create User';
     goToCreateUserPageBtn.classList = 'go-to-create-user-page-btn';
     goToCreateUserPageBtn.onclick = function() {
+        click_sfx.play();
         goToCreateUserPage();
     }
     landingPageFormContainer.appendChild(goToCreateUserPageBtn);
@@ -77,6 +81,7 @@ export function initializeCreateUserPage() {
     createUserBtn.innerText = 'Create !';
     createUserBtn.classList = 'create-user-btn';
     createUserBtn.onclick = async function() {
+        click_sfx.play();
         let username = document.getElementById('create-user-page-username-input').value;
         let teacherCheckbox = document.getElementById('teacher-checkbox');
         let teacherLoginPassword = document.querySelector('#teacher-login-password').value;
@@ -112,6 +117,7 @@ export function initializeCreateUserPage() {
     goToLandingPageBtn.innerHTML = '&larr;';
     goToLandingPageBtn.classList = 'back-to-login-btn';
     goToLandingPageBtn.onclick = function() {
+        click_sfx.play();
         goToLandingPage();
         createUserPage.innerHTML = '';
     }
